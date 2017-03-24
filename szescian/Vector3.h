@@ -1,7 +1,7 @@
 #pragma once
 #include <math.h>
 
-const float PI = 3.14159265359;
+const float PI = 3.14159265359f;
 
 class Vector3
 {
@@ -24,6 +24,7 @@ public:
 	Vector3 AnglesDeg() const { return Angles() * 180 / PI; }
 
 	Vector3 operator-() const { return Vector3(-X, -Y, -Z); }
+	operator float*() const	{ float coords[3] = { X, Y, Z }; return coords; }
 
 	friend bool operator== (const Vector3& v1, const Vector3& v2) { return v1.X == v2.X && v1.Y == v2.Y && v1.Z == v2.Z; }
 	friend bool operator!= (const Vector3& v1, const Vector3& v2) { return !(v1 == v2); }
