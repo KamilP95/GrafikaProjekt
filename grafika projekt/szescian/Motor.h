@@ -28,7 +28,8 @@
 
 #include "Basic3D.h"
 
-class Motor : private Basic3D
+class Motor :
+	Basic3D
 {
 public:
 	Motor();

@@ -29,12 +29,12 @@
 class Basic2D
 {
 public:
-	float lenght;
-	float widght;
-	float r;
 	Basic2D();
 	void Circle(float r);
 	void Elipse(float r, float skosnosc);
+	void Rectangle(float lenght, float widght);
+	void Square(float a);
+	void Trapeze(float lenght1, float lenght2, float wdght);
 	~Basic2D();
 };
 

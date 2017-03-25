@@ -37,6 +37,7 @@
 #include "Basic3D.h"
 #include "Prop.h"
 #include "Motor.h"
+#include "Shield.h"
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -349,14 +350,20 @@ void RenderScene(void)
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
 	
-	Motor c;
-	c.Draw(10, 20);
+	Motor m;
+	m.Draw(10, 20);
 
 	glTranslatef(0, 0, 10);
 	glColor3f(0.5, 0.5, 1);
 
 	Prop b;
 	b.Draw(5, 30, 3);
+
+	glTranslatef(0, 0, -10);
+
+	Shield c;
+	c.Draw(35, 40, 30);
+
 
 	//Uzyskanie siatki:
 	//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);

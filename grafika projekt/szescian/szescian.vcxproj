@@ -153,6 +153,7 @@
     <ClCompile Include="Gl_template.cpp" />
     <ClCompile Include="Motor.cpp" />
     <ClCompile Include="Prop.cpp" />
+    <ClCompile Include="Shield.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Motor.h" />
     <ClInclude Include="Prop.h" />
     <ClInclude Include="RESOURCE.H" />
+    <ClInclude Include="Shield.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

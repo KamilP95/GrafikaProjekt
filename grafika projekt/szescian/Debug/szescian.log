@@ -1,3 +1,6 @@
-﻿  Motor.cpp
-  szescian.vcxproj -> C:\Users\User\Desktop\grafika projekt\Debug\szescian.exe
-  szescian.vcxproj -> C:\Users\User\Desktop\grafika projekt\Debug\szescian.pdb (Full PDB)
+﻿  Gl_template.cpp
+c:\users\user\desktop\github\grafikaprojekt\grafika projekt\szescian\gl_template.cpp(273): warning C4018: '<': signed/unsigned mismatch
+c:\users\user\desktop\github\grafikaprojekt\grafika projekt\szescian\gl_template.cpp(721): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\user\desktop\github\grafikaprojekt\grafika projekt\szescian\gl_template.cpp(722): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+  szescian.vcxproj -> C:\Users\User\Desktop\GitHub\GrafikaProjekt\grafika projekt\Debug\szescian.exe
+  szescian.vcxproj -> C:\Users\User\Desktop\GitHub\GrafikaProjekt\grafika projekt\Debug\szescian.pdb (Full PDB)
