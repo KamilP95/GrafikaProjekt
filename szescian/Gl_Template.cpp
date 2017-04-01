@@ -37,6 +37,9 @@
 #include "Cube.h"
 #include "Cylinder.h"
 #include "Cone.h"
+#include "Motor.h"
+#include "Prop.h"
+#include "Shield.h"
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -282,6 +285,30 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 }
 
 
+void UkladWsp(void)
+{
+	glColor3f(1.0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(100, 0, 0);
+	glEnd();
+
+	glColor3f(0, 1, 0);
+	glBegin(GL_LINES);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, 100, 0);
+	glEnd();
+
+	glColor3f(0, 0, 1);
+	glBegin(GL_LINES);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, 0, 100);
+	glEnd();
+
+}
+
+
+
 // Called to draw scene
 void RenderScene(void)
 {
@@ -294,12 +321,12 @@ void RenderScene(void)
 	glPushMatrix();
 	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
 	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-
+	UkladWsp();
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
 
-	Cone c(20, 40);
+	Shield c;
 	c.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:

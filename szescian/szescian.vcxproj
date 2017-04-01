@@ -152,7 +152,10 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="Gl_Template.cpp" />
+    <ClCompile Include="Motor.cpp" />
     <ClCompile Include="Orb.cpp" />
+    <ClCompile Include="Prop.cpp" />
+    <ClCompile Include="Shield.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,8 +166,11 @@
     <ClInclude Include="Cone.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
+    <ClInclude Include="Motor.h" />
     <ClInclude Include="Orb.h" />
+    <ClInclude Include="Prop.h" />
     <ClInclude Include="RESOURCE.H" />
+    <ClInclude Include="Shield.h" />
     <ClInclude Include="Solid3D.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Vector3.h" />
