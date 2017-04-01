@@ -364,7 +364,6 @@ void RenderScene(void)
 	Shield c;
 	c.Draw(35, 40, 30);
 
-
 	//Uzyskanie siatki:
 	//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 

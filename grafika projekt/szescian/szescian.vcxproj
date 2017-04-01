@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arm.cpp" />
     <ClCompile Include="Basic2D.cpp" />
     <ClCompile Include="Basic3D.cpp" />
     <ClCompile Include="Gl_template.cpp" />
@@ -160,6 +161,7 @@
     <None Include="RESOURCE.APS" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arm.h" />
     <ClInclude Include="Basic2D.h" />
     <ClInclude Include="Basic3D.h" />
     <ClInclude Include="Motor.h" />
