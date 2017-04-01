@@ -1,5 +1,6 @@
 #pragma once
 #include "Solid3D.h"
+
 class Sphere :
 	public Solid3D
 {

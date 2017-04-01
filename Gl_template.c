@@ -32,6 +32,7 @@
 #include <math.h>				// Define for sqrt
 #include <stdio.h>
 #include "resource.h"           // About box resource identifiers.
+#include "szescian/Sphere.h"
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -364,7 +365,7 @@ void RenderScene(void)
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK,GL_LINE);
 	
-	szescian();
+	//szescian();
 
 	//Uzyskanie siatki:
 	//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
