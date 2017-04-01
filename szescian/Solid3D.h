@@ -24,7 +24,13 @@ public:
 	Vector3 Position = Vector3();
 	Vector3 Rotation = Vector3();
 	Vector3 Scale = Vector3(1.0f, 1.0f, 1.0f);
+	Vector3 Color;
 
 	virtual void Draw() = 0;
 	virtual ~Solid3D() {};
+
+	void SetPosition(float x, float y, float z) { Position = Vector3(x, y, z); }
+	void SetRotation(float x, float y, float z) { Rotation = Vector3(x, y, z); }
+	void SetScale(float x, float y, float z) { Scale = Vector3(x, y, z); }
+	void SetColor(float x, float y, float z) { Color = Vector3(x, y, z); }
 };

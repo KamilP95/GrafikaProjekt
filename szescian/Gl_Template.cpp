@@ -34,6 +34,7 @@
 #include "resource.h"           // About box resource identifiers.
 
 #include "Sphere.h"
+#include "Cube.h"
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -296,8 +297,9 @@ void RenderScene(void)
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
 
-	Sphere c;
-	c.Draw();
+	Cube cube(20, 20, 20);
+	cube.SetColor(1, 0, 0);
+	cube.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
@@ -665,25 +667,25 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	break;
 
 	// A menu command
-	case WM_COMMAND:
-	{
-		switch (LOWORD(wParam))
-		{
-			// Exit the program
-		case ID_FILE_EXIT:
-			DestroyWindow(hWnd);
-			break;
+	//case WM_COMMAND:
+	//{
+	//	switch (LOWORD(wParam))
+	//	{
+	//		// Exit the program
+	//	case ID_FILE_EXIT:
+	//		DestroyWindow(hWnd);
+	//		break;
 
-			// Display the about box
-		case ID_HELP_ABOUT:
-			DialogBox(hInstance,
-				MAKEINTRESOURCE(IDD_DIALOG_ABOUT),
-				hWnd,
-				AboutDlgProc);
-			break;
-		}
-	}
-	break;
+	//		// Display the about box
+	//	case ID_HELP_ABOUT:
+	//		DialogBox(hInstance,
+	//			MAKEINTRESOURCE(IDD_DIALOG_ABOUT),
+	//			hWnd,
+	//			AboutDlgProc);
+	//		break;
+	//	}
+	//}
+	//break;
 
 
 	default:   // Passes it on if unproccessed

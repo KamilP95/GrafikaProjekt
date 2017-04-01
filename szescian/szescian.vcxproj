@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Gl_Template.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <None Include="RESOURCE.APS" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="RESOURCE.H" />
     <ClInclude Include="Solid3D.h" />
     <ClInclude Include="Sphere.h" />
