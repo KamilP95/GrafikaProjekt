@@ -3,6 +3,7 @@
 
 void Shield::Draw()
 {
+	//glColor3fv(Color);
 	Orb In(Radius, Radius, Height);
 	Orb Out(Radius + Thickness, Radius + Thickness, Height/3);
 	Orb Up(Radius + Thickness, Radius, Height/3);

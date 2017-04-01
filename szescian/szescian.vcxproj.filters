@@ -45,6 +45,12 @@
     <ClCompile Include="Grip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MotorPart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Arm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3.h">
@@ -81,6 +87,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Grip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MotorPart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Arm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

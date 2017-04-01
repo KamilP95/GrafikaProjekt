@@ -3,6 +3,7 @@
 
 void Prop::Draw()
 {
+	//glColor3fv(Color);
 	Cone Part(Width, Radius);
 
 	glPushMatrix();

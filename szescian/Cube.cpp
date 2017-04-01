@@ -10,7 +10,7 @@ Cube::Cube(float x, float y, float z, float skewness):Skewness(skewness)
 void Cube::Draw()
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glColor3fv(Color);
+	//glColor3fv(Color);
 	glBegin(GL_TRIANGLE_STRIP);
 		glVertex3f(-Scale.X / 2, -Scale.Y / 2, Scale.Z / 2);
 		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, Scale.Z / 2);

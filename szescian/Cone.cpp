@@ -3,7 +3,7 @@
 
 void Cone::Draw()
 {
-	glColor3fv(Color);
+	//glColor3fv(Color);
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0.0f, 0.0f, Height / 2);

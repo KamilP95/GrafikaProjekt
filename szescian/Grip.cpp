@@ -3,6 +3,7 @@
 
 void Grip::Draw()
 {
+	//glColor3fv(Color);
 	glPushMatrix();
 	glRotatef(90, 1, 0, 0);
 	Cylinder Part(RadiusSmall, RadiusBig);
