@@ -327,17 +327,9 @@ void RenderScene(void)
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
 
-	Motor a;
-	Prop b;
-	Grip c;
-	Shield d;
-	a.SetColor(1, 0, 0);
+	Cube a(20,5,30,5);
+
 	a.Draw();
-	glTranslatef(0, 0, 10);
-	b.Draw();
-	glTranslatef(0, 0, -10);
-	c.Draw();
-	d.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);

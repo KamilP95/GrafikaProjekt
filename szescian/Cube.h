@@ -4,7 +4,9 @@ class Cube :
 	public Solid3D
 {
 public:
-	Cube(float x, float y, float z);
+	float Skewness;
+
+	Cube(float x, float y, float z, float skewness = 0);
 	
 	virtual void Draw() override;
 };
