@@ -35,6 +35,7 @@
 
 #include "Sphere.h"
 #include "Cube.h"
+#include "Cylinder.h"
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -297,9 +298,9 @@ void RenderScene(void)
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
 
-	Cube cube(20, 20, 20);
-	cube.SetColor(1, 0, 0);
-	cube.Draw();
+	Cylinder c(20, 30);
+	c.SetScale(0.5, 1, 2);
+	c.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
