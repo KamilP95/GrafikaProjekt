@@ -152,6 +152,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="Gl_Template.cpp" />
+    <ClCompile Include="Grip.cpp" />
     <ClCompile Include="Motor.cpp" />
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Prop.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Cone.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
+    <ClInclude Include="Grip.h" />
     <ClInclude Include="Motor.h" />
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Prop.h" />

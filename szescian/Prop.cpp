@@ -1,7 +1,6 @@
 #include "Prop.h"
 
 
-
 void Prop::Draw()
 {
 	Cone Part(Width, Radius);

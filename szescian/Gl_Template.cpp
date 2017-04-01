@@ -40,6 +40,7 @@
 #include "Motor.h"
 #include "Prop.h"
 #include "Shield.h"
+#include "Grip.h"
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -326,8 +327,17 @@ void RenderScene(void)
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
 
-	Shield c;
+	Motor a;
+	Prop b;
+	Grip c;
+	Shield d;
+	a.SetColor(1, 0, 0);
+	a.Draw();
+	glTranslatef(0, 0, 10);
+	b.Draw();
+	glTranslatef(0, 0, -10);
 	c.Draw();
+	d.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);

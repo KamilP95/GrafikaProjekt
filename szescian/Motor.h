@@ -9,7 +9,7 @@ public:
 	float Radius;
 	float Height;
 
-	Motor(float radius = 10, float height = 10) : Radius(radius), Height(height) {}
+	Motor(float radius = 10, float height = 15) : Radius(radius), Height(height) {}
 
 	virtual void Draw() override;
 
