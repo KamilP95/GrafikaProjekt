@@ -9,8 +9,10 @@ public:
 	float Width;
 	float Height;
 	float Skewness;
+	Cube In;
+	Cube Out;
 
-	Arm(float lenght = 60, float height = 10, float width = 15, float skewness = 5) :Lenght(lenght), Height(height), Width(width), Skewness(skewness) {}
+	Arm(float lenght = 60, float height = 10, float width = 15, float skewness = 5);
 
 	virtual void Draw() override;
 

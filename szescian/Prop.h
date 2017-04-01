@@ -7,8 +7,9 @@ class Prop :
 public:
 	float Radius;
 	float Width;
+	Cone Part;
 
-	Prop(float radius = 20, float width = 5) : Radius(radius), Width(width) {}
+	Prop(float radius = 20, float width = 5);
 
 	virtual void Draw() override;
 };

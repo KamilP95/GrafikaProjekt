@@ -8,8 +8,10 @@ class Motor :
 public:
 	float Radius;
 	float Height;
+	Cylinder Down;
+	Cone Up;
 
-	Motor(float radius = 10, float height = 15) : Radius(radius), Height(height) {}
+	Motor(float radius = 10, float height = 15);
 
 	virtual void Draw() override;
 

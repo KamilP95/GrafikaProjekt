@@ -1,12 +1,16 @@
 #include "Grip.h"
 
 
+Grip::Grip(float radiusBig, float radiusSmall) :RadiusSmall(radiusSmall), RadiusBig(radiusBig)
+{
+	Part = Cylinder(RadiusSmall, RadiusBig);
+}
+
 void Grip::Draw()
 {
 	//glColor3fv(Color);
 	glPushMatrix();
 	glRotatef(90, 1, 0, 0);
-	Cylinder Part(RadiusSmall, RadiusBig);
 
 	for (int i = 0; i < 3; i++)
 	{

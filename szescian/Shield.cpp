@@ -1,14 +1,17 @@
 #include "Shield.h"
 
 
+Shield::Shield(float radius, float height, float thickness) :Radius(radius), Height(height), Thickness(thickness)
+{
+	In = Orb (Radius, Radius, Height);
+	Out = Orb (Radius + Thickness, Radius + Thickness, Height / 3);
+	Up = Orb (Radius + Thickness, Radius, Height / 3);
+	Down = Orb (Radius, Radius + Thickness, Height / 3);
+}
+
 void Shield::Draw()
 {
 	//glColor3fv(Color);
-	Orb In(Radius, Radius, Height);
-	Orb Out(Radius + Thickness, Radius + Thickness, Height/3);
-	Orb Up(Radius + Thickness, Radius, Height/3);
-	Orb Down(Radius, Radius + Thickness, Height/3);
-
 	glPushMatrix();
 	glTranslatef(0, 0, -Height / 2);
 	In.Draw();

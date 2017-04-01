@@ -7,8 +7,9 @@ class Grip :
 public:
 	float RadiusSmall;
 	float RadiusBig;
+	Cylinder Part;
 
-	Grip(float radiusBig = 30, float radiusSmall = 3) : RadiusSmall(radiusSmall), RadiusBig(radiusBig) {}
+	Grip(float radiusBig = 30, float radiusSmall = 3);
 
 	virtual void Draw() override;
 

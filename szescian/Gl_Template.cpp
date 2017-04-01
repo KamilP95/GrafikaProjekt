@@ -303,7 +303,9 @@ void UkladWsp(void)
 
 }
 
-
+Sphere z(45);
+Arm a;
+MotorPart b;
 
 // Called to draw scene
 void RenderScene(void)
@@ -322,10 +324,7 @@ void RenderScene(void)
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
 	glScalef(0.5, 0.5, 0.5);
-	
-	Sphere z(45);
-	Arm a;
-	MotorPart b;
+
 	glPushMatrix();
 	glScalef(1, 1, 0.5);
 	z.Draw();

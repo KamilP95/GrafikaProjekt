@@ -8,8 +8,12 @@ public:
 	float Radius;
 	float Height;
 	float Thickness;
+	Orb In;
+	Orb Out;
+	Orb Up;
+	Orb Down;
 
-	Shield(float radius = 30, float height = 15, float thickness = 3) : Radius(radius), Height(height), Thickness(thickness) {}
+	Shield(float radius = 30, float height = 15, float thickness = 3);
 
 	virtual void Draw() override;
 };

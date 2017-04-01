@@ -6,7 +6,7 @@ class Cube :
 public:
 	float Skewness;
 
-	Cube(float x, float y, float z, float skewness = 0);
+	Cube(float x = 10, float y = 10, float z = 10, float skewness = 0);
 	
 	virtual void Draw() override;
 };

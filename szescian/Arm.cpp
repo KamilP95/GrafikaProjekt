@@ -1,11 +1,14 @@
 #include "Arm.h"
 
 
+Arm::Arm(float lenght, float height, float width, float skewness) :Lenght(lenght), Height(height), Width(width), Skewness(skewness)
+{
+	In = Cube(Lenght, Width, Height / 3);
+	Out = Cube(Width, Height / 3, Lenght, Skewness);
+}
+
 void Arm::Draw()
 {
-	Cube In(Lenght, Width, Height / 3);
-	Cube Out(Width, Height / 3, Lenght, Skewness);
-
 	glPushMatrix();
 	glColor3f(1, 0, 0);
 	In.Draw();

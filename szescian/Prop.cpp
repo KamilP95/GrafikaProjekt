@@ -1,11 +1,14 @@
 #include "Prop.h"
 
 
+Prop::Prop(float radius, float width) :Radius(radius), Width(width)
+{
+	Part = Cone(Width, Radius);
+}
+
 void Prop::Draw()
 {
 	//glColor3fv(Color);
-	Cone Part(Width, Radius);
-
 	glPushMatrix();
 	glScalef(1, 1, 0.3);		//vector Scale nie chce dzialac
 	glRotatef(90.0, 0.0, 1.0, 0.0);

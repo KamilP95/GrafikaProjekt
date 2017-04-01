@@ -1,18 +1,19 @@
 #include "MotorPart.h"
 
-
+MotorPart::MotorPart(float radius, float height) : Radius(radius), Height(height)
+{
+	motor = Motor(Radius / 4, Height);
+	prop = Prop(Radius - 5);
+	shield = Shield(Radius, Height);
+	grip = Grip(Radius);
+}
 
 void MotorPart::Draw()
 {
-	Motor motor(Radius / 4, Height);
-	Prop prop(Radius - 5);
-	Shield shield(Radius, Height);
-	Grip grip(Radius);
-
 	glPushMatrix();
 	glColor3f(1, 0, 0);
 	motor.Draw();
-	glColor3f(0, 1, 1);
+	glColor3f(1, 0, 1);
 	shield.Draw();
 	glColor3f(0, 1, 0);
 	grip.Draw();

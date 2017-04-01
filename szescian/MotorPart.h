@@ -11,8 +11,12 @@ class MotorPart :
 public:
 	float Radius;
 	float Height;
+	Motor motor;
+	Prop prop;
+	Shield shield;
+	Grip grip;
 
-	MotorPart(float radius = 30, float height = 15) : Radius(radius), Height(height) {}
+	MotorPart(float radius = 30, float height = 15);
 
 	virtual void Draw() override;
 };
