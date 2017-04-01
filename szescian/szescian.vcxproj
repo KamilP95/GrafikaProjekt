@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="Gl_Template.cpp" />
@@ -158,6 +159,7 @@
     <None Include="RESOURCE.APS" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cone.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="RESOURCE.H" />
