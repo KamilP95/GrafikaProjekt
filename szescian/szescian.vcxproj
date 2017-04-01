@@ -148,15 +148,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Gl_template.c" />
+    <ClCompile Include="Gl_Template.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\RESOURCE.APS" />
     <None Include="ClassDiagram.cd" />
+    <None Include="RESOURCE.APS" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\RESOURCE.H" />
+    <ClInclude Include="RESOURCE.H" />
     <ClInclude Include="Solid3D.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Vector3.h" />
