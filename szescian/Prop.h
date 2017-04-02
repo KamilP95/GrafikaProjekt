@@ -1,16 +1,12 @@
 #pragma once
-#include"Solid3D.h"
+#include"Complex3D.h"
 #include"Cone.h"
 class Prop :
-	public Solid3D
+	public Complex3D
 {
 public:
-	float Radius;
-	float Width;
-	Cone Part;
+	Prop(float x = 20, float y = 5, float z = 20);
 
-	Prop(float radius = 20, float width = 5);
-
-	virtual void Draw() override;
+	void Rotate(float speed);
 };
 

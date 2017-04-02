@@ -3,14 +3,19 @@
 
 Grip::Grip(float radiusBig, float radiusSmall) :RadiusSmall(radiusSmall), RadiusBig(radiusBig)
 {
-	//Part = Cylinder(RadiusSmall, RadiusBig);
+	Part = Cylinder();
+	Part.SetScale(RadiusSmall * 2, RadiusBig, RadiusSmall * 2);
+	Part.SetRotation(90, 0, 0);
 }
 
 void Grip::Draw()
 {
-	//glColor3fv(Color);
+	glColor3fv(Color);
 	glPushMatrix();
-	glRotatef(90, 1, 0, 0);
+
+	Transform();
+	
+	
 
 	for (int i = 0; i < 3; i++)
 	{

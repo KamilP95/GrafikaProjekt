@@ -3,12 +3,21 @@
 
 void Orb::Draw()
 {
-	//glColor3fv(Color);
+	float step = PI / Accuracy * 2;
+	glPushMatrix();
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	Transform();
+
+	glColor3fv(Color);
 	glBegin(GL_TRIANGLE_STRIP);
-	for (float i = 0; i < 2 * PI + 0.1; i += 0.1)
+	for (float i = 0; i < 2 * PI + step; i += step)
 	{
-		glVertex3f(sin(i) * Radius1, cos(i) * Radius1, 0.0f);
-		glVertex3f(sin(i) * Radius2, cos(i) * Radius2, Height);
+		glVertex3f(sin(i), -0.5, cos(i));
+		glVertex3f(sin(i) * Ratio, 0.5, cos(i) * Ratio);
 	}
 	glEnd();
+
+	glPopMatrix();
 }

@@ -306,6 +306,7 @@ void UkladWsp(void)
 
 }
 
+MotorPart mp(0.5,0.5,0.5), mp2;
 // Called to draw scene
 void RenderScene(void)
 {
@@ -324,8 +325,13 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	Camera c(2,2,2);
-	c.Draw();
+	
+	mp.SetPosition(-40, 0, 0);
+	mp2.SetPosition(40, 0, 0);
+
+	mp.Draw();
+	mp2.Draw();
+	
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
@@ -684,6 +690,12 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 
 		if (wParam == VK_RIGHT)
 			yRot += 5.0f;
+
+		if (wParam == VK_SPACE)
+		{
+			mp.RotateProp(50);
+			mp2.RotateProp(-20);
+		}
 
 		xRot = (const int)xRot % 360;
 		yRot = (const int)yRot % 360;

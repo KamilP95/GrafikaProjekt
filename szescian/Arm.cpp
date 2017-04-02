@@ -1,24 +1,20 @@
 #include "Arm.h"
 
 
-Arm::Arm(float lenght, float height, float width, float skewness) :Lenght(lenght), Height(height), Width(width), Skewness(skewness)
+Arm::Arm(float x, float y, float z, float skewness)
+	: Complex3D(3, x, y, z), Skewness(skewness)
 {
-	In = Cube(Lenght, Width, Height / 3);
-	Out = Cube(Width, Height / 3, Lenght, Skewness);
-}
+	_elements[0] = new Cube(1, 1 / 3.0f, 1);//In
+	_elements[1] = new Cube(1, 1 / 3.0f, 1, Skewness / x * 2);//Upper Out
+	_elements[2] = new Cube(1, 1 / 3.0f, 1, Skewness / x * 2);//Lower Out
 
-void Arm::Draw()
-{
-	glPushMatrix();
-	glColor3f(1, 0, 0);
-	In.Draw();
-	glRotatef(90, 1, 0, 0);
-	glRotatef(90, 0, 1, 0);
-	glTranslatef(0, Height / 3, 0);
-	glColor3f(0, 1, 0);
-	Out.Draw();
-	glRotatef(180, 1, 0, 0);
-	glTranslatef(0, 2 * Height / 3, 0);
-	Out.Draw();
-	glPopMatrix();
+	_elements[0]->SetColor(0.1, 0.1, 0.1);
+
+	_elements[1]->SetRotation(0, 90, 0);
+	_elements[1]->SetPosition(0, 1 / 3.0f, 0);
+	_elements[1]->SetColor(0.7, 0.7, 0.7);
+
+	_elements[2]->SetRotation(180, 90, 0);
+	_elements[2]->SetPosition(0, -1 / 3.0f, 0);
+	_elements[2]->SetColor(0.7, 0.7, 0.7);
 }

@@ -1,23 +1,19 @@
 #pragma once
-#include"Solid3D.h"
+#include"Complex3D.h"
 #include"Prop.h"
 #include"Motor.h"
 #include"Shield.h"
 #include"Grip.h"
 
 class MotorPart :
-	public Solid3D
+	public Complex3D
 {
+private:
+	Prop* _prop;
 public:
-	float Radius;
-	float Height;
-	Motor motor;
-	Prop prop;
-	Shield shield;
-	Grip grip;
+	
+	MotorPart(float x = 1, float y = 1, float z = 1);
 
-	MotorPart(float radius = 30, float height = 15);
-
-	virtual void Draw() override;
+	void RotateProp(float speed);
 };
 

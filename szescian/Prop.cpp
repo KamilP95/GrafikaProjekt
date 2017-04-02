@@ -1,21 +1,27 @@
 #include "Prop.h"
 
 
-Prop::Prop(float radius, float width) :Radius(radius), Width(width)
+Prop::Prop(float x, float y, float z)
+	: Complex3D(2, x, y, z)
 {
-	//Part = Cone(Width, Radius);
+	_elements[0] = new Cone;
+	_elements[1] = new Cone;
+
+	_elements[0]->SetScale(1, 0.5, 1);
+	_elements[1]->SetScale(1, 0.5, 1);
+
+	_elements[0]->SetRotation(-85, 0, 5);
+	_elements[0]->SetPosition(0, 0, 0.25);
+	_elements[0]->SetColor(0.1, 0.1, 0.1);
+
+	_elements[1]->SetRotation(85, 0, -5);
+	_elements[1]->SetPosition(0, 0, -0.25);
+	_elements[1]->SetColor(0.1, 0.1, 0.1);
 }
 
-void Prop::Draw()
+void Prop::Rotate(float speed)
 {
-	//glColor3fv(Color);
-	glPushMatrix();
-	glScalef(1, 1, 0.3);		//vector Scale nie chce dzialac
-	glRotatef(90.0, 0.0, 1.0, 0.0);
-	glTranslatef(0, 0, -Radius / 2);
-	Part.Draw();
-	glRotatef(180.0, 0.0, 1.0, 0.0);
-	glTranslatef(0, 0, -Radius);
-	Part.Draw();
-	glPopMatrix();
+	Rotation = Rotation + Vector3(0, speed, 0);
 }
+
+

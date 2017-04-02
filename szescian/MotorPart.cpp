@@ -1,24 +1,28 @@
 #include "MotorPart.h"
 
-MotorPart::MotorPart(float radius, float height) : Radius(radius), Height(height)
+MotorPart::MotorPart(float x, float y, float z )
+	: Complex3D(4, x, y, z)
 {
-	motor = Motor(Radius / 4, Height);
+	/*motor = Motor(Radius / 4, Height);
 	prop = Prop(Radius - 5);
 	shield = Shield(Radius, Height);
-	grip = Grip(Radius);
+	grip = Grip(Radius);*/
+	_elements[0] = new Motor();
+	_elements[1] = new Prop(5, 1, 45);
+	_elements[2] = new Shield(30,20,30);
+	_elements[3] = new Grip(30, 1);
+
+	_elements[1]->SetPosition(0, 5, 0);
+
+	_elements[3]->SetColor(0.5, 0.5, 0.5);
+	_elements[3]->SetPosition(0, -5, 0);
+
+	_prop = (Prop*)_elements[1];
 }
 
-void MotorPart::Draw()
+void MotorPart::RotateProp(float speed)
 {
-	glPushMatrix();
-	glColor3f(1, 0, 0);
-	motor.Draw();
-	glColor3f(1, 0, 1);
-	shield.Draw();
-	glColor3f(0, 1, 0);
-	grip.Draw();
-	glColor3f(0, 0, 1);
-	glTranslatef(0, 0, Height / 2);
-	prop.Draw();
-	glPopMatrix();
+	_prop->Rotate(speed);
 }
+
+
