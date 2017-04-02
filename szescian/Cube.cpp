@@ -2,39 +2,49 @@
 
 
 
-Cube::Cube(float x, float y, float z, float skewness):Skewness(skewness)
+Cube::Cube(float x, float y, float z, float skewness)
 {
 	SetScale(x, y, z);
+	skewness /= x;
+	if (skewness < -0.5f)
+		Skewness = -0.5f;
+	else if (skewness > 0.5f)
+		Skewness = 0.5f;
+	else Skewness = skewness;
 }
 
 void Cube::Draw()
 {
+	glPushMatrix();
+
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//glColor3fv(Color);
+
+	Transform();
+	glColor3fv(Color);
+
 	glBegin(GL_TRIANGLE_STRIP);
-		glVertex3f(-Scale.X / 2, -Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(Scale.X / 2, -Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(Scale.X / 2 -Skewness, Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(Scale.X / 2, -Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(Scale.X / 2 -Skewness, Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(-Scale.X / 2, -Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(-Scale.X / 2, -Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, Scale.Z / 2);
+		glVertex3f(-0.5, -0.5, 0.5);
+		glVertex3f(-0.5 + Skewness, 0.5, 0.5);
+		glVertex3f(0.5, -0.5, 0.5);
+		glVertex3f(0.5 - Skewness, 0.5, 0.5);
+		glVertex3f(0.5, -0.5, -0.5);
+		glVertex3f(0.5 - Skewness, 0.5, -0.5);
+		glVertex3f(-0.5, -0.5, -0.5);
+		glVertex3f(-0.5 + Skewness, 0.5, -0.5);
+		glVertex3f(-0.5, -0.5, 0.5);
+		glVertex3f(-0.5 + Skewness, 0.5, 0.5);
 	glEnd();
 	glBegin(GL_TRIANGLE_STRIP);
-		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(Scale.X / 2 -Skewness, Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(Scale.X / 2 -Skewness, Scale.Y / 2, Scale.Z / 2);
+		glVertex3f(-0.5 + Skewness, 0.5, -0.5);
+		glVertex3f(0.5 - Skewness, 0.5, -0.5);
+		glVertex3f(-0.5 + Skewness, 0.5, 0.5);
+		glVertex3f(0.5 - Skewness, 0.5, 0.5);
 	glEnd();
 	glBegin(GL_TRIANGLE_STRIP);
-		glVertex3f(-Scale.X / 2, -Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(-Scale.X / 2, -Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(Scale.X / 2, -Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(Scale.X / 2, -Scale.Y / 2, Scale.Z / 2);
+		glVertex3f(-0.5, -0.5, -0.5);
+		glVertex3f(-0.5, -0.5, 0.5);
+		glVertex3f(0.5, -0.5, -0.5);
+		glVertex3f(0.5, -0.5, 0.5);
 	glEnd();
+	glPopMatrix();
 }
-
-

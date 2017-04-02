@@ -6,8 +6,9 @@ class Cone :
 public:
 	float Radius;
 	float Height;
+	int Accuracy;
 
-	Cone(float radius = 5, float height = 20) : Radius(radius), Height(height) {}
+	Cone(int accuracy = 50) : Accuracy(accuracy) {}
 
 	virtual void Draw() override;
 

@@ -2,29 +2,37 @@
 
 void Sphere::Draw()
 {
-	float r1 = Radius, r2;
-	float deltaZ = Radius / 20;
+	float step = PI / Accuracy * 2;
+	float r1 = 1, r2;
+	float deltaZ = r1 / Accuracy * 2;
 
+	glPushMatrix();
+
+	Transform();
+	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	for (int i = 0; i < 20; i++)
+	
+	for (int i = 0; i < Accuracy; i++)
 	{
-		glColor3f(1.0f / i, 0.02f * i, 0);
-		r2 = sqrtf(Radius * Radius - deltaZ * (i + 1) * deltaZ * (i + 1));
+		glColor3fv((Vector3(deltaZ, deltaZ, deltaZ) * (i - 1) + Color) / 2);
+		r2 = sqrtf(1 - deltaZ * (i + 1) * deltaZ * (i + 1));
 		for (int j = -1; j <= 1; j += 2)
 		{
 			glBegin(GL_TRIANGLE_STRIP);
-			for (float a = 0; a <= 2 * 3.15; a += PI / 50) {
-				float x1 = cosf(a) * Scale.X;
-				float y1 = sinf(a) * Scale.Y;
+			for (float a = 0; a <= 2 * PI + step; a += step) {
+				float x1 = cosf(a);
+				float z1 = sinf(a);
 				float x2 = x1 * r2;
-				float y2 = y1 * r2;
-				x1 *= r1; y1 *= r1;
+				float z2 = z1 * r2;
+				x1 *= r1; z1 *= r1;
 				
-				glVertex3f(x1, y1, deltaZ * i * j * Scale.Z);
-				glVertex3f(x2, y2, deltaZ * (i + 1) * j * Scale.Z);
+				glVertex3f(x1, deltaZ * i * j, z1);
+				glVertex3f(x2, deltaZ * (i + 1) * j, z2);
 			}
 			glEnd();
 		}
 		r1 = r2;
 	}
+
+	glPopMatrix();
 }

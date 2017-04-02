@@ -4,8 +4,8 @@
 
 Skid::Skid()
 {
-	base = Cylinder(3, 50);
-	connection = Cylinder(2, 25);
+	/*base = Cylinder(3, 50);
+	connection = Cylinder(2, 25);*/
 }
 
 void Skid::Draw()

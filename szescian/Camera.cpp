@@ -4,11 +4,11 @@
 
 Camera::Camera()
 {
-	connection = Cylinder(5, 10);
+	/*connection = Cylinder(5, 10);
 	lens = Cylinder(4, 5);
 	glass = Cylinder(3, 0.1f);
 	cover = Cube(15, 15, 20);
-	diode = Sphere(1);
+	diode = Sphere(1);*/
 }
 
 void Camera::Draw()

@@ -6,8 +6,9 @@ class Sphere :
 {
 public:
 	float Radius;
+	int Accuracy;
 
-	Sphere(float radius = 10) : Radius(radius) {}
+	Sphere(int accuracy = 50) : Accuracy(accuracy) {}
 	virtual ~Sphere() {}
 
 	virtual void Draw() override;

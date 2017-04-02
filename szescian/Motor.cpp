@@ -2,8 +2,8 @@
 
 Motor::Motor(float radius, float height) :Radius(radius), Height(height)
 {
-	Down = Cylinder(Radius, Height / 2);
-	Up = Cone(Radius, Height / 2);
+	/*Down = Cylinder(Radius, Height / 2);
+	Up = Cone(Radius, Height / 2);*/
 }
 
 void Motor::Draw()

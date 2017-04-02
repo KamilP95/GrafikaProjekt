@@ -5,7 +5,7 @@
 Drone::Drone()
 {
 	cover = Sphere(45);
-	antenna = Cylinder(1, 50);
+	//antenna = Cylinder(1, 50);
 }
 
 void Drone::Draw()

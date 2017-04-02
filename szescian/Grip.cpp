@@ -3,7 +3,7 @@
 
 Grip::Grip(float radiusBig, float radiusSmall) :RadiusSmall(radiusSmall), RadiusBig(radiusBig)
 {
-	Part = Cylinder(RadiusSmall, RadiusBig);
+	//Part = Cylinder(RadiusSmall, RadiusBig);
 }
 
 void Grip::Draw()

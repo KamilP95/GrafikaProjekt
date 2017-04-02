@@ -4,10 +4,10 @@ class Cylinder :
 	public Solid3D
 {
 public:
-	float Radius;
+	int Accuracy;
 	float Height;
 
-	Cylinder(float radius = 5, float height = 20) : Radius(radius), Height(height) {}
+	Cylinder(int accuracy = 50) : Accuracy(accuracy) {}
 	
 	virtual void Draw() override;
 };

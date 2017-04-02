@@ -3,7 +3,7 @@
 
 Prop::Prop(float radius, float width) :Radius(radius), Width(width)
 {
-	Part = Cone(Width, Radius);
+	//Part = Cone(Width, Radius);
 }
 
 void Prop::Draw()

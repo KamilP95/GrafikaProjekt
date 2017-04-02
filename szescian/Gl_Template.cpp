@@ -306,10 +306,6 @@ void UkladWsp(void)
 
 }
 
-//Sphere z(45);
-//Arm a;
-//MotorPart b;
-
 // Called to draw scene
 void RenderScene(void)
 {
@@ -326,25 +322,11 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
-	/*glScalef(0.5, 0.5, 0.5);
+	Sphere s;
+	s.SetScale(50, 50, 50);
+	s.SetColor(0.5, 0.5, 0.5);
+	s.Draw();
 
-	glPushMatrix();
-	glScalef(1, 1, 0.5);
-	z.Draw();
-	glPopMatrix();
-
-	for (int i = 0; i < 6; i++)
-	{
-		glTranslatef(60 - 5, 0, 0);
-		a.Draw();
-		glTranslatef(60, 0, 0);
-		b.Draw();
-		glTranslatef(-120 + 5, 0, 0);
-		glRotatef(60, 0, 0, 1);
-	}*/
-	Drone d;
-	d.Draw();
-	
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
