@@ -36,6 +36,9 @@
 #include "Sphere.h"
 #include "MotorPart.h"
 #include "Arm.h"
+#include "Camera.h"
+#include "Skid.h"
+#include "Drone.h"
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -303,9 +306,9 @@ void UkladWsp(void)
 
 }
 
-Sphere z(45);
-Arm a;
-MotorPart b;
+//Sphere z(45);
+//Arm a;
+//MotorPart b;
 
 // Called to draw scene
 void RenderScene(void)
@@ -323,7 +326,7 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
-	glScalef(0.5, 0.5, 0.5);
+	/*glScalef(0.5, 0.5, 0.5);
 
 	glPushMatrix();
 	glScalef(1, 1, 0.5);
@@ -338,7 +341,10 @@ void RenderScene(void)
 		b.Draw();
 		glTranslatef(-120 + 5, 0, 0);
 		glRotatef(60, 0, 0, 1);
-	}
+	}*/
+	Drone d;
+	d.Draw();
+	
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);

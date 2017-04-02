@@ -149,9 +149,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Arm.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
+    <ClCompile Include="Drone.cpp" />
     <ClCompile Include="Gl_Template.cpp" />
     <ClCompile Include="Grip.cpp" />
     <ClCompile Include="Motor.cpp" />
@@ -159,6 +161,7 @@
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Prop.cpp" />
     <ClCompile Include="Shield.cpp" />
+    <ClCompile Include="Skid.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +170,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arm.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Cone.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
+    <ClInclude Include="Drone.h" />
     <ClInclude Include="Grip.h" />
     <ClInclude Include="Motor.h" />
     <ClInclude Include="MotorPart.h" />
@@ -177,6 +182,7 @@
     <ClInclude Include="Prop.h" />
     <ClInclude Include="RESOURCE.H" />
     <ClInclude Include="Shield.h" />
+    <ClInclude Include="Skid.h" />
     <ClInclude Include="Solid3D.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Vector3.h" />
