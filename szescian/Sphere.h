@@ -5,8 +5,8 @@ class Sphere :
 	public Solid3D
 {
 public:
-	float Radius;
 	int Accuracy;
+	float Radius;
 
 	Sphere(int accuracy = 50) : Accuracy(accuracy) {}
 	virtual ~Sphere() {}

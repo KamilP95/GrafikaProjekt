@@ -2,48 +2,35 @@
 
 
 
-Camera::Camera()
+Camera::Camera(float x, float y, float z)
+	: Complex3D(5, x, y, z)
 {
-	/*connection = Cylinder(5, 10);
-	lens = Cylinder(4, 5);
-	glass = Cylinder(3, 0.1f);
-	cover = Cube(15, 15, 20);
-	diode = Sphere(1);*/
-}
+	_elements[0] = new Cylinder;//connection
+	_elements[1] = new Cylinder;//lens 
+	_elements[2] = new Cylinder;//glass
+	_elements[3] = new Cube;//cover
+	_elements[4] = new Sphere;//diode
 
-void Camera::Draw()
-{
-	glPushMatrix();
+	_elements[0]->SetScale(5, 5, 5);
+	_elements[1]->SetScale(4, 5, 4);
+	_elements[2]->SetScale(3, 0.1, 3);
+	_elements[3]->SetScale(15, 15, 20);
 	
-	glScalef(Scale.X, Scale.Y, Scale.Z);
-	glRotatef(Rotation.X, 1, 0, 0);
-	glRotatef(Rotation.Y, 0, 1, 0);
-	glRotatef(Rotation.Z, 0, 0, 1);
-	glTranslatef(Position.X, Position.Y, Position.Z);
 
-	glColor3f(0.5, 0.5, 0.5);
-	cover.Draw();
+	_elements[0]->SetPosition(0, _elements[0]->Height() / 2 + _elements[3]->Height() / 2, 0);
+	_elements[0]->SetColor(0.3, 0.3, 0.3);
 
-	glColor3f(0, 1, 0);
-	glTranslatef(0, connection.Height, 0);
-	glRotatef(90, 1, 0, 0);
-	connection.Draw();
+	_elements[1]->SetRotation(90, 0, 0);
+	_elements[1]->SetPosition(0, 0, _elements[1]->Height() / 2 + _elements[3]->Length() / 2);
+	_elements[1]->SetColor(0, 0, 0);
 
-	glColor3f(0, 0, 0);
-	glRotatef(-90, 1, 0, 0);
-	glTranslatef(0, -connection.Height, cover.Scale.Z / 2 + lens.Height / 2);
-	lens.Draw();
+	_elements[2]->SetRotation(90, 0, 0);
+	_elements[2]->SetPosition(0, 0, 0.05 + _elements[1]->Height() + _elements[3]->Length() / 2);
+	_elements[2]->SetColor(0.8, 0.8, 1);
 
-	glColor3f(0.8, 0.8, 1);
-	glTranslatef(0, 0, glass.Height / 2 + lens.Height / 2);
-	glass.Draw();
+	_elements[3]->SetColor(0.1, 0.1, 0.1);
 
-	glColor3f(1, 0, 0);
-	glTranslatef(0.3 * cover.Scale.X, 0.3 * cover.Scale.Y, -glass.Height / 2 - lens.Height);
-	diode.Draw();
-
-	glPopMatrix();
+	_elements[4]->SetPosition(0.3 * _elements[3]->Width(), 0.3 * _elements[3]->Height(), _elements[3]->Length() / 2);
+	_elements[4]->SetColor(1, 0, 0);
 }
-
-
 

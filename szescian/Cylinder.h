@@ -5,8 +5,7 @@ class Cylinder :
 {
 public:
 	int Accuracy;
-	float Height;
-
+	
 	Cylinder(int accuracy = 50) : Accuracy(accuracy) {}
 	
 	virtual void Draw() override;

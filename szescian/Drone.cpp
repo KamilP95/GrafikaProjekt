@@ -21,7 +21,7 @@ void Drone::Draw()
 	glPushMatrix();
 		glColor3f(0.3, 0.3, 0.3);
 		glRotatef(90, 1, 0, 0);
-		glTranslatef(0, cover.Radius / 4 + antenna.Height / 2 * sinf(70 * 180 / PI), -cover.Radius * 0.8);
+		glTranslatef(0, cover.Radius / 4 + antenna.Height() / 2 * sinf(70 * 180 / PI), -cover.Radius * 0.8);
 		glRotatef(70, 1, 0, 0);
 		antenna.Draw();
 	glPopMatrix();

@@ -6,6 +6,8 @@ void Cylinder::Draw()
 	float step = PI / Accuracy * 2;
 	glPushMatrix();
 
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
 	Transform();
 
 	glColor3fv(Color);

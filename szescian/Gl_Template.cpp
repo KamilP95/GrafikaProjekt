@@ -322,11 +322,10 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
-	Sphere s;
-	s.SetScale(50, 50, 50);
-	s.SetColor(0.5, 0.5, 0.5);
-	s.Draw();
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+	Camera c(2,2,2);
+	c.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);

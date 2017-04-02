@@ -27,12 +27,16 @@ public:
 	Vector3 Color = Vector3(.5f, .5f, .5f);
 
 	virtual void Draw() = 0;
-	virtual ~Solid3D() {};
+	virtual ~Solid3D() {}
 
 	void SetPosition(float x, float y, float z) { Position = Vector3(x, y, z); }
 	void SetRotation(float x, float y, float z) { Rotation = Vector3(x, y, z); }
 	void SetScale(float x, float y, float z) { Scale = Vector3(x, y, z); }
 	void SetColor(float x, float y, float z) { Color = Vector3(x, y, z); }
+
+	float Height() const { return Scale.Y; }
+	float Width() const { return Scale.X; }
+	float Length() const { return Scale.Z; }
 
 protected:
 

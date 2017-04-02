@@ -1,18 +1,14 @@
 #pragma once
-#include "Solid3D.h"
+#include "Complex3D.h"
 #include "Cylinder.h"
 
 class Skid :
-	public Solid3D
+	public Complex3D
 {
 private:
-	Cylinder base;
-	Cylinder connection;
+	
 public:
-	Skid();
-
-	float Height() const { return sinf(70 * 180 / PI) * connection.Height; }
-
-	virtual void Draw() override;
+	Skid(float x = 1, float y = 1, float z = 1);
+	
 };
 
