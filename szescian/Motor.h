@@ -1,13 +1,17 @@
 #pragma once
 #include "Solid3D.h"
-class Cone :
+#include "Cone.h"
+#include "Cylinder.h"
+class Motor :
 	public Solid3D
 {
 public:
 	float Radius;
 	float Height;
+	Cylinder Down;
+	Cone Up;
 
-	Cone(float radius = 5, float height = 20) : Radius(radius), Height(height) {}
+	Motor(float radius = 10, float height = 15);
 
 	virtual void Draw() override;
 

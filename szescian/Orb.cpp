@@ -3,6 +3,7 @@
 
 void Orb::Draw()
 {
+	//glColor3fv(Color);
 	glBegin(GL_TRIANGLE_STRIP);
 	for (float i = 0; i < 2 * PI + 0.1; i += 0.1)
 	{

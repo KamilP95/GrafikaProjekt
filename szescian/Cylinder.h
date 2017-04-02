@@ -7,7 +7,7 @@ public:
 	float Radius;
 	float Height;
 
-	Cylinder(float radius, float height) : Radius(radius), Height(height) {}
+	Cylinder(float radius = 5, float height = 20) : Radius(radius), Height(height) {}
 	
 	virtual void Draw() override;
 };

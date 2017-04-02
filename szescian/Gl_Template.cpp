@@ -34,10 +34,8 @@
 #include "resource.h"           // About box resource identifiers.
 
 #include "Sphere.h"
-#include "Cube.h"
-#include "Cylinder.h"
-#include "Cone.h"
-#include "Orb.h"
+#include "MotorPart.h"
+#include "Arm.h"
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -283,6 +281,32 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 }
 
 
+void UkladWsp(void)
+{
+	glColor3f(1.0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(100, 0, 0);
+	glEnd();
+
+	glColor3f(0, 1, 0);
+	glBegin(GL_LINES);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, 100, 0);
+	glEnd();
+
+	glColor3f(0, 0, 1);
+	glBegin(GL_LINES);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, 0, 100);
+	glEnd();
+
+}
+
+Sphere z(45);
+Arm a;
+MotorPart b;
+
 // Called to draw scene
 void RenderScene(void)
 {
@@ -295,13 +319,26 @@ void RenderScene(void)
 	glPushMatrix();
 	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
 	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-
+	UkladWsp();
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
+	glScalef(0.5, 0.5, 0.5);
 
-	Orb orb(20, 15, 10);
-	orb.Draw();
+	glPushMatrix();
+	glScalef(1, 1, 0.5);
+	z.Draw();
+	glPopMatrix();
+
+	for (int i = 0; i < 6; i++)
+	{
+		glTranslatef(60 - 5, 0, 0);
+		a.Draw();
+		glTranslatef(60, 0, 0);
+		b.Draw();
+		glTranslatef(-120 + 5, 0, 0);
+		glRotatef(60, 0, 0, 1);
+	}
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);

@@ -2,7 +2,7 @@
 
 
 
-Cube::Cube(float x, float y, float z)
+Cube::Cube(float x, float y, float z, float skewness):Skewness(skewness)
 {
 	SetScale(x, y, z);
 }
@@ -10,24 +10,24 @@ Cube::Cube(float x, float y, float z)
 void Cube::Draw()
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glColor3fv(Color);
+	//glColor3fv(Color);
 	glBegin(GL_TRIANGLE_STRIP);
 		glVertex3f(-Scale.X / 2, -Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(-Scale.X / 2, Scale.Y / 2, Scale.Z / 2);
+		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, Scale.Z / 2);
 		glVertex3f(Scale.X / 2, -Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(Scale.X / 2, Scale.Y / 2, Scale.Z / 2);
+		glVertex3f(Scale.X / 2 -Skewness, Scale.Y / 2, Scale.Z / 2);
 		glVertex3f(Scale.X / 2, -Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(Scale.X / 2, Scale.Y / 2, -Scale.Z / 2);
+		glVertex3f(Scale.X / 2 -Skewness, Scale.Y / 2, -Scale.Z / 2);
 		glVertex3f(-Scale.X / 2, -Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(-Scale.X / 2, Scale.Y / 2, -Scale.Z / 2);
+		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, -Scale.Z / 2);
 		glVertex3f(-Scale.X / 2, -Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(-Scale.X / 2, Scale.Y / 2, Scale.Z / 2);
+		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, Scale.Z / 2);
 	glEnd();
 	glBegin(GL_TRIANGLE_STRIP);
-		glVertex3f(-Scale.X / 2, Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(Scale.X / 2, Scale.Y / 2, -Scale.Z / 2);
-		glVertex3f(-Scale.X / 2, Scale.Y / 2, Scale.Z / 2);
-		glVertex3f(Scale.X / 2, Scale.Y / 2, Scale.Z / 2);
+		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, -Scale.Z / 2);
+		glVertex3f(Scale.X / 2 -Skewness, Scale.Y / 2, -Scale.Z / 2);
+		glVertex3f(-Scale.X / 2 +Skewness, Scale.Y / 2, Scale.Z / 2);
+		glVertex3f(Scale.X / 2 -Skewness, Scale.Y / 2, Scale.Z / 2);
 	glEnd();
 	glBegin(GL_TRIANGLE_STRIP);
 		glVertex3f(-Scale.X / 2, -Scale.Y / 2, -Scale.Z / 2);
