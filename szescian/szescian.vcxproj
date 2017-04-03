@@ -157,6 +157,7 @@
     <ClCompile Include="Gl_Template.cpp" />
     <ClCompile Include="Grip.cpp" />
     <ClCompile Include="Motor.cpp" />
+    <ClCompile Include="MotorArm.cpp" />
     <ClCompile Include="MotorPart.cpp" />
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Prop.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Drone.h" />
     <ClInclude Include="Grip.h" />
     <ClInclude Include="Motor.h" />
+    <ClInclude Include="MotorArm.h" />
     <ClInclude Include="MotorPart.h" />
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Prop.h" />

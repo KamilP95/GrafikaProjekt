@@ -39,6 +39,7 @@
 #include "Camera.h"
 #include "Skid.h"
 #include "Drone.h"
+#include "MotorArm.h"
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
@@ -306,7 +307,9 @@ void UkladWsp(void)
 
 }
 
-MotorPart mp(0.5,0.5,0.5), mp2;
+Drone drone(0.5, 0.5, 0.5);
+MotorArm a;
+
 // Called to draw scene
 void RenderScene(void)
 {
@@ -325,13 +328,11 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	
-	mp.SetPosition(-40, 0, 0);
-	mp2.SetPosition(40, 0, 0);
-
-	mp.Draw();
-	mp2.Draw();
-	
+	a.SetPosition(50, 0, 20);
+	a.SetRotation(0, 90, 0);
+	drone.SetPosition(-40, 0, 0);
+	a.Draw();
+	drone.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
@@ -693,8 +694,8 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 
 		if (wParam == VK_SPACE)
 		{
-			mp.RotateProp(50);
-			mp2.RotateProp(-20);
+			drone.RotateProps(30);
+			a.RotateProp(30);
 		}
 
 		xRot = (const int)xRot % 360;

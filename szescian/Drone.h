@@ -1,23 +1,16 @@
 #pragma once
-#include "Solid3D.h"
-#include "MotorPart.h"
-#include "Arm.h"
+#include "Complex3D.h"
+#include "MotorArm.h"
 #include "Sphere.h"
 #include "Skid.h"
 #include "Camera.h"
 
 class Drone :
-	public Solid3D
+	public Complex3D
 {
-	Sphere cover;
-	Arm arm;
-	MotorPart motor;
-	Skid skid;
-	Camera camera;
-	Cylinder antenna;
 public:
-	Drone();
+	Drone(float x = 1, float y = 1, float z = 1);
 	
-	virtual void Draw() override;
+	void RotateProps(float speed) const;
 };
 

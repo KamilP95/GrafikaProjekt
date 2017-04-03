@@ -16,7 +16,7 @@ Shield::Shield(float x, float y, float z, float thickness)
 
 	_elements[0]->SetColor(0.65, 0.65, 0.65);
 
-	_elements[1]->SetColor(0.6, 0.6, 0.6);
+	_elements[1]->SetColor(0.1, 0.1, 0.1);
 
 	_elements[2]->SetColor(0.7, 0.7, 0.7);
 	_elements[2]->SetPosition(0, 1 / 3.0f, 0);

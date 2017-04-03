@@ -1,6 +1,8 @@
 #pragma once
 #include"Complex3D.h"
 #include"Cube.h"
+
+
 class Arm :
 	public Complex3D
 {
