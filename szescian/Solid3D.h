@@ -13,6 +13,7 @@
 #include <windows.h>            // Window defines
 #include <gl\gl.h>              // OpenGL
 #include <gl\glu.h>             // GLU library
+#include <math.h>
 
 
 #include "Vector3.h"

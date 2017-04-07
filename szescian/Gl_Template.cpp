@@ -36,6 +36,7 @@
 
 #include "Drone.h"
 #include "Random.h"
+#include "StoneWall.h"
 
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
@@ -306,7 +307,7 @@ void UkladWsp(void)
 }
 
 Drone drone(0.5, 0.5, 0.5);
-
+StoneWall sw(10, 0, 5);
 
 // Called to draw scene
 void RenderScene(void)
@@ -327,7 +328,7 @@ void RenderScene(void)
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	
-	drone.Draw();
+	sw.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
