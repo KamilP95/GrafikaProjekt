@@ -183,6 +183,7 @@
     <ClInclude Include="MotorPart.h" />
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Prop.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="RESOURCE.H" />
     <ClInclude Include="Shield.h" />
     <ClInclude Include="Skid.h" />
