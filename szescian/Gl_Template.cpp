@@ -33,17 +33,15 @@
 #include <stdio.h>
 #include "resource.h"           // About box resource identifiers.
 
-#include "Sphere.h"
-#include "MotorPart.h"
-#include "Arm.h"
-#include "Camera.h"
-#include "Skid.h"
+
 #include "Drone.h"
-#include "MotorArm.h"
+#include "Random.h"
+
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
 #define BITMAP_ID 0x4D42		// identyfikator formatu BMP
 #define GL_PI 3.14
+
 
 // Color Palette handle
 HPALETTE hPalette = NULL;
@@ -467,6 +465,8 @@ int APIENTRY WinMain(HINSTANCE       hInst,
 	HWND            hWnd;           // Storeage for window handle
 
 	hInstance = hInst;
+
+	Random::InitializeSeed(); //inicjalizacja klasy random
 
 	// Register Window style
 	wc.style = CS_HREDRAW | CS_VREDRAW;
