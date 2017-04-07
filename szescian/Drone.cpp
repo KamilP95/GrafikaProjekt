@@ -45,7 +45,7 @@ void Drone::RotateProps(float speed) const
 	int j = 1;
 	for(int i = 4; i < 10; i++)
 	{
-		((MotorPart*)_elements[i])->RotateProp(speed * j);
+		static_cast<MotorArm*>(_elements[i])->RotateProp(speed * j);
 		j *= -1;
 	}
 }

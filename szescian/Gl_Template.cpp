@@ -308,7 +308,7 @@ void UkladWsp(void)
 }
 
 Drone drone(0.5, 0.5, 0.5);
-MotorArm a;
+
 
 // Called to draw scene
 void RenderScene(void)
@@ -328,10 +328,7 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	a.SetPosition(50, 0, 20);
-	a.SetRotation(0, 90, 0);
-	drone.SetPosition(-40, 0, 0);
-	a.Draw();
+	
 	drone.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
@@ -695,7 +692,7 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		if (wParam == VK_SPACE)
 		{
 			drone.RotateProps(30);
-			a.RotateProp(30);
+			
 		}
 
 		xRot = (const int)xRot % 360;
