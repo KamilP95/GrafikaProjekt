@@ -38,6 +38,9 @@ Drone::Drone(float x, float y, float z)
 		
 		++j;
 	}
+
+	_elements[0]->SetColor(0.9,0.9,0.9);
+	_elements[0]->SetColor2(0.1,0.1,0.1);
 }
 
 void Drone::RotateProps(float speed) const

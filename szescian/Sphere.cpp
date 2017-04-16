@@ -3,36 +3,29 @@
 void Sphere::Draw()
 {
 	float step = PI / Accuracy * 2;
-	float r1 = 1, r2;
-	float deltaZ = r1 / Accuracy * 2;
 
 	glPushMatrix();
 
 	Transform();
 	
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	
-	for (int i = 0; i < Accuracy; i++)
+	for (float j = -PI / 2; j <= PI / 2; j += step)
 	{
-		glColor3fv((Vector3(deltaZ, deltaZ, deltaZ) * (i - 1) + Color) / 2);
-		r2 = sqrtf(1 - deltaZ * (i + 1) * deltaZ * (i + 1));
-		for (int j = -1; j <= 1; j += 2)
+		glBegin(GL_TRIANGLE_STRIP);
+		for (float i = -PI; i <= PI + step; i += step)
 		{
-			glBegin(GL_TRIANGLE_STRIP);
-			for (float a = 0; a <= 2 * PI + step; a += step) {
-				float x1 = cosf(a);
-				float z1 = sinf(a);
-				float x2 = x1 * r2;
-				float z2 = z1 * r2;
-				x1 *= r1; z1 *= r1;
-				
-				glVertex3f(x1, deltaZ * i * j, z1);
-				glVertex3f(x2, deltaZ * (i + 1) * j, z2);
-			}
-			glEnd();
+			float y = sinf(j);
+			float r = cosf(j);
+			glColor3fv(Color * fabsf(y) + Color2 * (1.0 - fabsf(y)));
+			glVertex3f(cosf(i) *fabsf(r), y, sinf(i) * fabsf(r));
+
+			y = sinf(j + step);
+			r = cosf(j + step);
+			glColor3fv(Color * fabsf(y) + Color2 * (1.0 - fabsf(y)));
+			glVertex3f(cosf(i) * fabsf(r), y, sinf(i) * fabsf(r));
 		}
-		r1 = r2;
+		glEnd();
 	}
+	
 
 	glPopMatrix();
 }

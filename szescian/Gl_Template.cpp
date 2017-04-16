@@ -54,6 +54,7 @@ static HINSTANCE hInstance;
 // Rotation amounts
 static GLfloat xRot = 0.0f;
 static GLfloat yRot = 0.0f;
+static GLfloat zRot = 0.0f;
 
 
 static GLsizei lastHeight;
@@ -307,7 +308,7 @@ void UkladWsp(void)
 }
 
 Drone drone(0.5, 0.5, 0.5);
-StoneWall sw(10, 0, 5);
+
 
 // Called to draw scene
 void RenderScene(void)
@@ -321,19 +322,18 @@ void RenderScene(void)
 	glPushMatrix();
 	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
 	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+	glRotatef(zRot, 0.0f, 0.0f, 1.0f);
 	UkladWsp();
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
 	
-	sw.Draw();
+	drone.Draw();
+
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
-
-	
+		
 
 	//Uzyskanie siatki:
 	//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
@@ -690,6 +690,12 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		if (wParam == VK_RIGHT)
 			yRot += 5.0f;
 
+		if (wParam == 'Q')
+			zRot += 5.0f;
+
+		if (wParam == 'E')
+			zRot -= 5.0f;
+
 		if (wParam == VK_SPACE)
 		{
 			drone.RotateProps(30);
@@ -698,6 +704,7 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 
 		xRot = (const int)xRot % 360;
 		yRot = (const int)yRot % 360;
+		zRot = (const int)zRot % 360;
 
 		InvalidateRect(hWnd, NULL, FALSE);
 	}
