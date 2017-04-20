@@ -21,9 +21,9 @@ void StoneWall::Draw()
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	glTranslatef(-50, -50, 0);
-	Transform();
 	
+	Transform();
+	glTranslatef(-50, -50, 0);
 
 	for (int i = 0; i < _levelOfDetails; i++)
 	{

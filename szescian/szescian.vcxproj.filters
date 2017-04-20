@@ -66,6 +66,12 @@
     <ClCompile Include="StoneWall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MineStamp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MineShaft.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3.h">
@@ -129,6 +135,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StoneWall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MineStamp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MineShaft.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -37,6 +37,8 @@
 #include "Drone.h"
 #include "Random.h"
 #include "StoneWall.h"
+#include "MineStamp.h"
+#include "MineShaft.h"
 
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
@@ -308,7 +310,7 @@ void UkladWsp(void)
 }
 
 Drone drone(0.5, 0.5, 0.5);
-
+MineShaft s1, s2;
 
 // Called to draw scene
 void RenderScene(void)
@@ -327,8 +329,14 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
+	s1.SetScale(1.5, 1, 0.5);
+	s2.SetScale(1.5, 1, 0.5);
 	
-	drone.Draw();
+	s1.SetPosition(0, 0, -25);
+	s2.SetPosition(0, 0, 25);
+	
+	s1.Draw();
+	s2.Draw();
 
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
