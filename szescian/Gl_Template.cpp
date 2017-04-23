@@ -58,7 +58,7 @@ static GLfloat yRot = 0.0f;
 static GLfloat zRot = 0.0f;
 static GLfloat xTrans = 0.0f;
 static GLfloat yTrans = 0.0f;
-static GLfloat zTrans = 10.0f;
+static GLfloat zTrans = 100.0f;
 static GLfloat fovy = 0.0f;
 
 
@@ -166,7 +166,7 @@ void ChangeSize(GLsizei w, GLsizei h)
 
 	// Establish perspective: 
 	
-	gluPerspective(fovy,fAspect,1.0,2);
+	gluPerspective(2,fAspect,100,1);
 	
 
 	glMatrixMode(GL_MODELVIEW);
@@ -338,10 +338,9 @@ void RenderScene(void)
 
 	drone.SetScale(0.2, 0.2, 0.2);
 
-	drone.SetPosition(0, 0, 25);
-	s1.SetPosition(0, 0, -25);
-	s2.SetPosition(0, 0, 25);
-	p1.SetPosition(25, -31, 20);
+	drone.SetPosition(0, 0, 50);
+	s2.SetPosition(0, 0, 50);
+	p1.SetPosition(25, -31, 50);
 	/////////////////////////////////////////////
 	// linia 169 - funkcja odpowiedzialna za perspektywê.. jakoœ dzia³a, jak pojêcia nie mam
 	/////////////////////////////////////////////
