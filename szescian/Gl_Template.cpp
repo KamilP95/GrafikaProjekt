@@ -35,12 +35,9 @@
 
 
 #include "Drone.h"
-#include "Random.h"
-#include "StoneWall.h"
-#include "MineStamp.h"
-#include "MineShaft.h"
-#include "RailTracks.h"
 #include "Mine.h"
+#include "Trolley.h"
+
 
 
 #define glRGB(x, y, z)	glColor3ub((GLubyte)x, (GLubyte)y, (GLubyte)z)
@@ -312,7 +309,8 @@ void UkladWsp(void)
 }
 
 Drone drone(0.5, 0.5, 0.5);
-Mine s1;
+Mine s1, s2;
+Trolley p1;
 
 // Called to draw scene
 void RenderScene(void)
@@ -327,13 +325,24 @@ void RenderScene(void)
 	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
 	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
 	glRotatef(zRot, 0.0f, 0.0f, 1.0f);
-	UkladWsp();
+
+	//UkladWsp();
+	
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
 
+	drone.SetScale(0.2, 0.2, 0.2);
 
+	drone.SetPosition(0, 0, 25);
+	s1.SetPosition(0, 0, -25);
+	s2.SetPosition(0, 0, 25);
+	p1.SetPosition(25, -30, 0);
+	
+	drone.Draw();
+	p1.Draw();
 	s1.Draw();
+	s2.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);

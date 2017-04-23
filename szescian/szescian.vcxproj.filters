@@ -78,6 +78,15 @@
     <ClCompile Include="Mine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Trolley.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrolleyUnderbody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrolleyBody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3.h">
@@ -153,6 +162,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Mine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Trolley.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrolleyUnderbody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrolleyBody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

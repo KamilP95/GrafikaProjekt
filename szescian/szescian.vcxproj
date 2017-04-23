@@ -169,6 +169,9 @@
     <ClCompile Include="Skid.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="StoneWall.cpp" />
+    <ClCompile Include="Trolley.cpp" />
+    <ClCompile Include="TrolleyBody.cpp" />
+    <ClCompile Include="TrolleyUnderbody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -199,6 +202,9 @@
     <ClInclude Include="Solid3D.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="StoneWall.h" />
+    <ClInclude Include="Trolley.h" />
+    <ClInclude Include="TrolleyBody.h" />
+    <ClInclude Include="TrolleyUnderbody.h" />
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
