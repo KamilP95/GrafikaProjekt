@@ -156,6 +156,7 @@
     <ClCompile Include="Drone.cpp" />
     <ClCompile Include="Gl_Template.cpp" />
     <ClCompile Include="Grip.cpp" />
+    <ClCompile Include="Mine.cpp" />
     <ClCompile Include="MineShaft.cpp" />
     <ClCompile Include="MineStamp.cpp" />
     <ClCompile Include="Motor.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="MotorPart.cpp" />
     <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Prop.cpp" />
+    <ClCompile Include="RailTracks.cpp" />
     <ClCompile Include="Shield.cpp" />
     <ClCompile Include="Skid.cpp" />
     <ClCompile Include="Sphere.cpp" />
@@ -181,6 +183,7 @@
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="Drone.h" />
     <ClInclude Include="Grip.h" />
+    <ClInclude Include="Mine.h" />
     <ClInclude Include="MineShaft.h" />
     <ClInclude Include="MineStamp.h" />
     <ClInclude Include="Motor.h" />
@@ -188,6 +191,7 @@
     <ClInclude Include="MotorPart.h" />
     <ClInclude Include="Orb.h" />
     <ClInclude Include="Prop.h" />
+    <ClInclude Include="RailTracks.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="RESOURCE.H" />
     <ClInclude Include="Shield.h" />

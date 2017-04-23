@@ -72,6 +72,12 @@
     <ClCompile Include="MineShaft.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RailTracks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3.h">
@@ -141,6 +147,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MineShaft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RailTracks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
