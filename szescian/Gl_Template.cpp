@@ -56,6 +56,10 @@ static HINSTANCE hInstance;
 static GLfloat xRot = 0.0f;
 static GLfloat yRot = 0.0f;
 static GLfloat zRot = 0.0f;
+static GLfloat xTrans = 0.0f;
+static GLfloat yTrans = 0.0f;
+static GLfloat zTrans = 10.0f;
+static GLfloat fovy = 0.0f;
 
 
 static GLsizei lastHeight;
@@ -161,9 +165,9 @@ void ChangeSize(GLsizei w, GLsizei h)
 		glOrtho(-nRange*w / h, nRange*w / h, -nRange, nRange, -nRange, nRange);
 
 	// Establish perspective: 
-	/*
-	gluPerspective(60.0f,fAspect,1.0,400);
-	*/
+	
+	gluPerspective(fovy,fAspect,1.0,2);
+	
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -319,15 +323,15 @@ void RenderScene(void)
 
 	// Clear the window with current clearing color
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	// Save the matrix state and do the rotations
 	glPushMatrix();
-	glRotatef(xRot, 1.0f, 0.0f, 0.0f);
-	glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-	glRotatef(zRot, 0.0f, 0.0f, 1.0f);
+	//glRotatef(xRot, 1.0f, 0.0f, 0.0f);
+	//glRotatef(yRot, 0.0f, 1.0f, 0.0f);
+	//glRotatef(zRot, 0.0f, 0.0f, 1.0f);
 
-	//UkladWsp();
-	
+	gluLookAt(xTrans, yTrans, zTrans, xRot, yRot, zRot, 0, 1, 0);
+
+	UkladWsp();
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
@@ -338,16 +342,17 @@ void RenderScene(void)
 	s1.SetPosition(0, 0, -25);
 	s2.SetPosition(0, 0, 25);
 	p1.SetPosition(25, -31, 20);
-	
+	/////////////////////////////////////////////
+	// linia 169 - funkcja odpowiedzialna za perspektywê.. jakoœ dzia³a, jak pojêcia nie mam
+	/////////////////////////////////////////////
 	drone.Draw();
 	p1.Draw();
 	s1.Draw();
 	s2.Draw();
-
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
 		
-
+	
 	//Uzyskanie siatki:
 	//glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
@@ -692,22 +697,46 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	case WM_KEYDOWN:
 	{
 		if (wParam == VK_UP)
-			xRot -= 5.0f;
+			xRot -= 0.5f;
 
 		if (wParam == VK_DOWN)
-			xRot += 5.0f;
+			xRot += 0.5f;
 
 		if (wParam == VK_LEFT)
-			yRot -= 5.0f;
+			yRot -= 0.5f;
 
 		if (wParam == VK_RIGHT)
-			yRot += 5.0f;
+			yRot += 0.5f;
+		
+		if (wParam == 'J')
+			zRot += 0.5f;
+
+		if (wParam == 'L')
+			zRot -= 0.5f;
+
+		if (wParam == 'W')
+			yTrans += 0.5f;
+
+		if (wParam == 'S')
+			yTrans -= 0.5f;
+
+		if (wParam == 'A')
+			xTrans += 0.5f;
+
+		if (wParam == 'D')
+			xTrans -= 0.5f;
 
 		if (wParam == 'Q')
-			zRot += 5.0f;
+			zTrans += 0.5f;
 
 		if (wParam == 'E')
-			zRot -= 5.0f;
+			zTrans -= 0.5f;
+
+		if (wParam == '+' && fovy < 180)
+			fovy++;
+
+		if (wParam == '-' && fovy > 0)
+			fovy--;
 
 		if (wParam == VK_SPACE)
 		{
@@ -718,7 +747,6 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		xRot = (const int)xRot % 360;
 		yRot = (const int)yRot % 360;
 		zRot = (const int)zRot % 360;
-
 		InvalidateRect(hWnd, NULL, FALSE);
 	}
 	break;
