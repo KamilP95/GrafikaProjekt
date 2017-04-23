@@ -337,7 +337,7 @@ void RenderScene(void)
 	drone.SetPosition(0, 0, 25);
 	s1.SetPosition(0, 0, -25);
 	s2.SetPosition(0, 0, 25);
-	p1.SetPosition(25, -30, 0);
+	p1.SetPosition(25, -31, 20);
 	
 	drone.Draw();
 	p1.Draw();
