@@ -294,7 +294,7 @@ void tekstura(void)
 {
 	glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			
 													// ³aduje pierwszy obraz tekstury:
-	bitmapData = LoadBitmapFile("Bitmapy\\checker.bmp", &bitmapInfoHeader);
+	bitmapData = LoadBitmapFile("Bitmapy\\drewno.bmp", &bitmapInfoHeader);
 
 	glBindTexture(GL_TEXTURE_2D, texture[0]);       // aktywuje obiekt tekstury
 

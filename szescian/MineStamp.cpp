@@ -25,4 +25,9 @@ MineStamp::MineStamp(float x, float y, float z)
 	_elements[4]->SetScale(3, 35, 3);
 	_elements[4]->SetRotation(0, 0, -45);
 	_elements[4]->SetPosition(-30, 30, 0);
+
+	for (int i = 0; i < _elementsCount; i++)
+	{
+		_elements[i]->SetTexture();
+	}
 }

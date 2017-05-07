@@ -27,6 +27,7 @@ public:
 	Vector3 Scale = Vector3(1.0f, 1.0f, 1.0f);
 	Vector3 Color = Vector3(.5f, .5f, .5f);
 	Vector3 Color2 = Vector3(.5f, .5f, .5f);
+	bool texture = 0;
 
 	virtual void Draw() = 0;
 	virtual ~Solid3D() {}
@@ -36,6 +37,7 @@ public:
 	void SetScale(float x, float y, float z) { Scale = Vector3(x, y, z); }
 	void SetColor(float r, float g, float b) { Color = Vector3(r, g, b); }
 	void SetColor2(float r, float g, float b) { Color2 = Vector3(r, g, b); }
+	void SetTexture() { texture = 1; }
 
 	float Height() const { return Scale.Y; }
 	float Width() const { return Scale.X; }
