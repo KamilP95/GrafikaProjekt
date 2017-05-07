@@ -3,6 +3,8 @@
 
 void Cylinder::Draw()
 {
+	glEnable(GL_TEXTURE_2D);
+
 	float step = PI / Accuracy * 2;
 	glPushMatrix();
 
@@ -14,7 +16,9 @@ void Cylinder::Draw()
 	glBegin(GL_TRIANGLE_STRIP);
 	for (float i = 0; i < 2 * PI + step; i += step)
 	{
+		glTexCoord2i(i, 0);
 		glVertex3f(sin(i), -0.5, cos(i));
+		glTexCoord2i(i, 1);
 		glVertex3f(sin(i), 0.5, cos(i));
 	}
 	glEnd();
@@ -36,4 +40,6 @@ void Cylinder::Draw()
 	glEnd();
 
 	glPopMatrix();
+
+	glDisable(GL_TEXTURE_2D);
 }

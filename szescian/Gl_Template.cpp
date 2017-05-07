@@ -290,6 +290,34 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPINFOHEADER *bitmapInfoHeader
 }
 
 
+void tekstura(void)
+{
+	glGenTextures(2, &texture[0]);                  // tworzy obiekt tekstury			
+													// ³aduje pierwszy obraz tekstury:
+	bitmapData = LoadBitmapFile("Bitmapy\\checker.bmp", &bitmapInfoHeader);
+
+	glBindTexture(GL_TEXTURE_2D, texture[0]);       // aktywuje obiekt tekstury
+
+	// tworzy obraz tekstury
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bitmapInfoHeader.biWidth,
+		bitmapInfoHeader.biHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bitmapData);
+	// ustalenie parametrów tekstury
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// ustalenie trybu teksturowania
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+	// w³¹czenie teksturowania
+	glDisable(GL_TEXTURE_1D);
+
+
+	//glEnable(GL_TEXTURE_2D);
+
+	if (bitmapData)
+		free(bitmapData);
+}
+
 void UkladWsp(void)
 {
 	glColor3f(1.0, 0, 0);
@@ -312,8 +340,10 @@ void UkladWsp(void)
 
 }
 
+
+Cylinder A;
 Drone drone(0.5, 0.5, 0.5);
-Mine s1, s2;
+Mine s1[6];
 Trolley p1;
 
 // Called to draw scene
@@ -336,18 +366,27 @@ void RenderScene(void)
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
 
+	tekstura();
+
+	A.SetColor(1, 0, 1);
+	A.Draw();
 	drone.SetScale(0.2, 0.2, 0.2);
 
 	drone.SetPosition(0, 0, 50);
-	s2.SetPosition(0, 0, 50);
-	p1.SetPosition(25, -31, 50);
-	/////////////////////////////////////////////
-	// linia 169 - funkcja odpowiedzialna za perspektywê.. jakoœ dzia³a, jak pojêcia nie mam
-	/////////////////////////////////////////////
+	for (int i = 0; i < 6; i++)
+	{
+		s1[i].SetPosition(0, 0, 50 * i);
+	}
+	p1.SetPosition(25, -31, 110);
 	drone.Draw();
 	p1.Draw();
-	s1.Draw();
-	s2.Draw();
+	for (int i = 0; i < 6; i++)
+	{
+		s1[i].Draw();
+	}
+
+
+
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
 		
