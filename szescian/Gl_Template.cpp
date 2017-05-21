@@ -59,7 +59,7 @@ static GLfloat yRot = 0.0f;
 static GLfloat zRot = 0.0f;
 static GLfloat xTrans = 0.0f;
 static GLfloat yTrans = 0.0f;
-static GLfloat zTrans = 100.0f;
+static GLfloat zTrans = 50.0f;
 static GLfloat fovy = 0.0f;
 
 
@@ -167,7 +167,7 @@ void ChangeSize(GLsizei w, GLsizei h)
 
 	// Establish perspective: 
 	
-	gluPerspective(2,fAspect,100,1);
+	//gluPerspective(2,fAspect,100,1);
 	
 
 	glMatrixMode(GL_MODELVIEW);
@@ -314,8 +314,9 @@ void UkladWsp(void)
 
 
 Drone drone(0.5, 0.5, 0.5);
-Mine s1[6];
-Trolley p1;
+float Xtrans = 0, Ytrans = 50, Ztrans = 0;
+float Xrot = 0, Yrot = 0, Zrot = 0;
+float Fprops = 0;
 
 // Called to draw scene
 void RenderScene(void)
@@ -336,22 +337,20 @@ void RenderScene(void)
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
+	glPushMatrix();
 
+	Xtrans += Fprops * -sin(Zrot * 3.14/180);
+	Ytrans += Fprops * cos(Zrot * 3.14 / 180) * cos(Xrot * 3.14 / 180);
+	Ztrans += Fprops * sin(Xrot * 3.14 / 180);
 
+	if (Ytrans > 0) Ytrans -= 0.25;	//grawitacja
+
+	drone.SetPosition(Xtrans, Ytrans, Ztrans);
+	drone.SetRotation(Xrot, Yrot, Zrot);
 	drone.SetScale(0.2, 0.2, 0.2);
-
-	drone.SetPosition(0, 0, 50);
-	for (int i = 0; i < 6; i++)
-	{
-		s1[i].SetPosition(0, 0, 50 * i);
-	}
-	p1.SetPosition(25, -31, 110);
 	drone.Draw();
-	p1.Draw();
-	for (int i = 0; i < 6; i++)
-	{
-		s1[i].Draw();
-	}
+
+	glPopMatrix();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
@@ -701,22 +700,25 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	case WM_KEYDOWN:
 	{
 		if (wParam == VK_UP)
-			xRot -= 0.5f;
+			Xrot += 0.5f;
 
 		if (wParam == VK_DOWN)
-			xRot += 0.5f;
+			Xrot -= 0.5f;
 
 		if (wParam == VK_LEFT)
-			yRot -= 0.5f;
+			Zrot += 0.5f;
 
 		if (wParam == VK_RIGHT)
-			yRot += 0.5f;
+			Zrot -= 0.5f;
 		
 		if (wParam == 'J')
-			zRot += 0.5f;
+			Fprops = -0.5f;
+		
+		if (wParam == 'K')
+			Fprops = 0.0f;
 
 		if (wParam == 'L')
-			zRot -= 0.5f;
+			Fprops = 0.5f;
 
 		if (wParam == 'W')
 			yTrans += 0.5f;
