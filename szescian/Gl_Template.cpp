@@ -54,12 +54,9 @@ static LPCTSTR lpszAppName = "GL Template";
 static HINSTANCE hInstance;
 
 // Rotation amounts
-static GLfloat xRot = 0.0f;
-static GLfloat yRot = 0.0f;
-static GLfloat zRot = 0.0f;
-static GLfloat xTrans = 0.0f;
-static GLfloat yTrans = 0.0f;
-static GLfloat zTrans = 50.0f;
+static GLfloat xCamera = 0.0f;
+static GLfloat yCamera = 50.0f;
+static GLfloat zCamera = 250.0f;
 static GLfloat fovy = 0.0f;
 
 
@@ -167,7 +164,7 @@ void ChangeSize(GLsizei w, GLsizei h)
 
 	// Establish perspective: 
 	
-	//gluPerspective(2,fAspect,100,1);
+	gluPerspective(2,fAspect,100,1);
 	
 
 	glMatrixMode(GL_MODELVIEW);
@@ -314,9 +311,13 @@ void UkladWsp(void)
 
 
 Drone drone(0.5, 0.5, 0.5);
-float Xtrans = 0, Ytrans = 50, Ztrans = 0;
+Mine s1[6];
+Trolley p1;
+
+float Xtrans = 0, Ytrans = 50, Ztrans = 200;
 float Xrot = 0, Yrot = 0, Zrot = 0;
-float Fprops = 0;
+float fProps = 0, aProps = 0;
+float fGravity = 0.07, aGravity = 0;
 
 // Called to draw scene
 void RenderScene(void)
@@ -327,30 +328,42 @@ void RenderScene(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// Save the matrix state and do the rotations
 	glPushMatrix();
-	//glRotatef(xRot, 1.0f, 0.0f, 0.0f);
-	//glRotatef(yRot, 0.0f, 1.0f, 0.0f);
-	//glRotatef(zRot, 0.0f, 0.0f, 1.0f);
 
-	gluLookAt(xTrans, yTrans, zTrans, xRot, yRot, zRot, 0, 1, 0);
+	gluLookAt(xCamera, yCamera, zCamera, 0, 50, 0, 0, 1, 0);
 
-	UkladWsp();
+	//UkladWsp();
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
-	glPushMatrix();
 
-	Xtrans += Fprops * -sin(Zrot * 3.14/180);
-	Ytrans += Fprops * cos(Zrot * 3.14 / 180) * cos(Xrot * 3.14 / 180);
-	Ztrans += Fprops * sin(Xrot * 3.14 / 180);
+	Xtrans += aProps * -sin(Zrot * 3.14/180);
+	Ytrans += aProps * cos(Zrot * 3.14 / 180) * cos(Xrot * 3.14 / 180);
+	Ztrans += aProps * sin(Xrot * 3.14 / 180);
 
-	if (Ytrans > 0) Ytrans -= 0.25;	//grawitacja
+	if (Ytrans > 7) Ytrans -= aGravity;
+	else
+	{
+		Ytrans = 7;
+		aGravity = 0;
+	}
 
 	drone.SetPosition(Xtrans, Ytrans, Ztrans);
 	drone.SetRotation(Xrot, Yrot, Zrot);
 	drone.SetScale(0.2, 0.2, 0.2);
-	drone.Draw();
 
-	glPopMatrix();
+	for (int i = 0; i < 6; i++)
+	{
+		s1[i].SetPosition(0, 50, 50 * i);
+	}
+	p1.SetPosition(25, 19, 110);
+
+
+	drone.Draw();
+	p1.Draw();
+	for (int i = 0; i < 6; i++)
+	{
+		s1[i].Draw();
+	}
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);
@@ -562,13 +575,20 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	case WM_TIMER:
 		if(wParam == 100)
 		{
-			drone.RotateProps(50);
+			if (aGravity < 1)
+			{
+				aGravity += fGravity;
+			}
+			aProps += fProps;
+			if (aProps > 0) aProps -= 0.1;
+			//zCamera -=0.2;
+			if(fProps > 0) drone.RotateProps(50);
 			InvalidateRect(hWnd, NULL, true);
 		}
 		break;
 		// Window creation, setup for OpenGL
 	case WM_CREATE:
-		SetTimer(hWnd, 100, 100, NULL);
+		SetTimer(hWnd, 100, 20, NULL);
 		// Store the device context
 		hDC = GetDC(hWnd);
 
@@ -708,43 +728,43 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	case WM_KEYDOWN:
 	{
 		if (wParam == VK_UP)
-			Xrot += 0.5f;
+			Xrot -= 2;
 
 		if (wParam == VK_DOWN)
-			Xrot -= 0.5f;
+			Xrot += 2;
 
 		if (wParam == VK_LEFT)
-			Zrot += 0.5f;
+			Zrot += 2;
 
 		if (wParam == VK_RIGHT)
-			Zrot -= 0.5f;
+			Zrot -= 2;
 		
-		if (wParam == 'J')
-			Fprops = -0.5f;
+		//if (wParam == WM_MOUSEWHEEL)
+		//	fProps += 0.1f;
 		
 		if (wParam == 'K')
-			Fprops = 0.0f;
+			fProps = 0.0f;
 
 		if (wParam == 'L')
-			Fprops = 0.5f;
+			fProps = 0.15f;
 
 		if (wParam == 'W')
-			yTrans += 0.5f;
+			yCamera += 0.5f;
 
 		if (wParam == 'S')
-			yTrans -= 0.5f;
+			yCamera -= 0.5f;
 
 		if (wParam == 'A')
-			xTrans += 0.5f;
+			xCamera += 0.5f;
 
 		if (wParam == 'D')
-			xTrans -= 0.5f;
+			xCamera -= 0.5f;
 
 		if (wParam == 'Q')
-			zTrans += 0.5f;
+			zCamera += 0.5f;
 
 		if (wParam == 'E')
-			zTrans -= 0.5f;
+			zCamera -= 0.5f;
 
 		if (wParam == '+' && fovy < 180)
 			fovy++;
@@ -752,15 +772,6 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		if (wParam == '-' && fovy > 0)
 			fovy--;
 
-		if (wParam == VK_SPACE)
-		{
-			drone.RotateProps(30);
-			
-		}
-
-		xRot = (const int)xRot % 360;
-		yRot = (const int)yRot % 360;
-		zRot = (const int)zRot % 360;
 		InvalidateRect(hWnd, NULL, FALSE);
 	}
 	break;
