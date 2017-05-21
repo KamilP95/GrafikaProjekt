@@ -169,6 +169,7 @@
     <ClCompile Include="Skid.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="StoneWall.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Trolley.cpp" />
     <ClCompile Include="TrolleyBody.cpp" />
     <ClCompile Include="TrolleyUnderbody.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="Solid3D.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="StoneWall.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Trolley.h" />
     <ClInclude Include="TrolleyBody.h" />
     <ClInclude Include="TrolleyUnderbody.h" />

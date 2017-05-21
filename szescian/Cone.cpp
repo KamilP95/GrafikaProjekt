@@ -11,6 +11,7 @@ void Cone::Draw()
 	Transform();
 
 	glColor3fv(Color);
+	if (TextureOn) glEnable(GL_TEXTURE_2D);
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0.0f, 0.5f, 0.0f);

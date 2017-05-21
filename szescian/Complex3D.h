@@ -1,5 +1,6 @@
 #pragma once
 #include "Solid3D.h"
+
 class Complex3D :
 	public Solid3D
 {
@@ -25,6 +26,7 @@ public:
 		glPushMatrix();
 
 		Transform();
+		Texture();
 
 		for (int i = 0; i < _elementsCount; ++i)
 			_elements[i]->Draw();

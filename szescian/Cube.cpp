@@ -21,6 +21,7 @@ void Cube::Draw()
 
 	Transform();
 	glColor3fv(Color);
+	if (TextureOn) glEnable(GL_TEXTURE_2D);
 
 	glBegin(GL_TRIANGLE_STRIP);
 		glVertex3f(-0.5, -0.5, 0.5);

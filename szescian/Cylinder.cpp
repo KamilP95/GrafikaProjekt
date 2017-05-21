@@ -10,7 +10,7 @@ void Cylinder::Draw()
 
 	Transform();
 	glColor3fv(Color);
-	if (texture)	glEnable(GL_TEXTURE_2D);
+	if (TextureOn) glEnable(GL_TEXTURE_2D);
 
 	glBegin(GL_TRIANGLE_STRIP);
 	for (float i = 0; i < 2 * PI + step; i += step)
