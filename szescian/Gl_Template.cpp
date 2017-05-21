@@ -559,8 +559,16 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 
 	switch (message)
 	{
+	case WM_TIMER:
+		if(wParam == 100)
+		{
+			drone.RotateProps(50);
+			InvalidateRect(hWnd, NULL, true);
+		}
+		break;
 		// Window creation, setup for OpenGL
 	case WM_CREATE:
+		SetTimer(hWnd, 100, 100, NULL);
 		// Store the device context
 		hDC = GetDC(hWnd);
 
