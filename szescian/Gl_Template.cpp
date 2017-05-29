@@ -38,6 +38,7 @@
 #include "Mine.h"
 #include "Trolley.h"
 #include "Texture.h"
+#include "Scene.h"
 
 
 
@@ -314,7 +315,7 @@ Drone drone(0.5, 0.5, 0.5);
 Mine s1[6];
 Trolley p1;
 
-float Xtrans = 0, Ytrans = 50, Ztrans = 200;
+float Xtrans = 0, Ytrans = 50, Ztrans = 0;
 float Xrot = 0, Yrot = 0, Zrot = 0;
 float fProps = 0, aProps = 0;
 float fGravity = 0.07, aGravity = 0;
@@ -329,7 +330,7 @@ void RenderScene(void)
 	// Save the matrix state and do the rotations
 	glPushMatrix();
 
-	gluLookAt(xCamera, yCamera, zCamera, 0, 50, 0, 0, 1, 0);
+	gluLookAt(0, 50, 100, 0, 50, 0, 0, 1, 0);
 
 	//UkladWsp();
 	/////////////////////////////////////////////////////////////////
@@ -347,22 +348,25 @@ void RenderScene(void)
 		aGravity = 0;
 	}
 
-	drone.SetPosition(Xtrans, Ytrans, Ztrans);
+	drone.SetPosition(Xtrans, Ytrans, 0);
 	drone.SetRotation(Xrot, Yrot, Zrot);
 	drone.SetScale(0.2, 0.2, 0.2);
 
+	if (Ztrans < -50)
+	{
+		Ztrans += 50;
+	}
+
 	for (int i = 0; i < 6; i++)
 	{
-		s1[i].SetPosition(0, 50, 50 * i);
+		s1[i].SetPosition(0, 50, -50 * i - Ztrans + 100);
 	}
-	p1.SetPosition(25, 19, 110);
-
 
 	drone.Draw();
-	p1.Draw();
+
 	for (int i = 0; i < 6; i++)
 	{
-		s1[i].Draw();
+		if(s1[i].GetPosition().Z < 100)	s1[i].Draw();
 	}
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:

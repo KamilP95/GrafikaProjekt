@@ -20,6 +20,7 @@ public:
 	virtual ~Solid3D() {}
 
 	void SetPosition(float x, float y, float z) { Position = Vector3(x, y, z); }
+	Vector3 GetPosition() { return Position; }
 	void SetRotation(float x, float y, float z) { Rotation = Vector3(x, y, z); }
 	void SetScale(float x, float y, float z) { Scale = Vector3(x, y, z); }
 	void SetColor(float r, float g, float b) { Color = Vector3(r, g, b); }
