@@ -342,9 +342,9 @@ void RenderScene(void)
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
 
-	Xtrans += aProps * -sin(Zrot * 3.14/180);
+	Xtrans += aProps * -sin(Zrot * 3.14 / 180) * sin(Xrot * 3.14 / 180);
 	Ytrans += aProps * cos(Zrot * 3.14 / 180) * cos(Xrot * 3.14 / 180);
-	Ztrans += aProps * -sin(Xrot * 3.14 / 180);
+	Ztrans += aProps * -sin(Xrot * 3.14 / 180) * cos(Zrot * 3.14 / 180);
 
 	if (Ytrans > 7) Ytrans -= aGravity;
 	else
@@ -353,8 +353,8 @@ void RenderScene(void)
 		aGravity = 0;
 	}
 
-	drone.SetPosition(Xtrans, Ytrans, 0);
-	drone.SetRotation(Xrot, Yrot, Zrot);
+	drone.SetPosition(0, Ytrans, 0);
+	drone.SetRotation(Xrot, Yrot, 0);
 	drone.SetScale(0.2, 0.2, 0.2);
 
 	if (Ztrans > 50)
@@ -363,13 +363,16 @@ void RenderScene(void)
 		sceneCount++;
 	}
 
+	glPushMatrix();
+	glRotated(-Zrot, 0, 1, 0);
 	for (int i = 0; i < 5; i++)
 	{
 		int tmp = i + sceneCount;
 		tmp %= 6;
-		s1[tmp].SetPosition(0, 50, -50 * i + Ztrans + 100);
+		s1[tmp].SetPosition(Xtrans, 50, -50 * i + Ztrans + 100);
 		s1[tmp].Draw();
 	}
+	glPopMatrix();
 
 	drone.Draw();
 
@@ -587,10 +590,12 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 			{
 				aGravity += fGravity;
 			}
-			aProps += fProps;
+			if (aProps < 2) aProps += fProps;
 			if (aProps > 0) aProps -= 0.1;
 			//zCamera -=0.2;
 			if(fProps > 0) drone.RotateProps(50);
+			Yrot /= 1.1;
+
 			InvalidateRect(hWnd, NULL, true);
 		}
 		break;
@@ -736,16 +741,23 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	case WM_KEYDOWN:
 	{
 		if (wParam == VK_UP)
-			Xrot -= 2;
+			Xrot -= 5;
 
 		if (wParam == VK_DOWN)
-			Xrot += 2;
+			Xrot += 5;
 
 		if (wParam == VK_LEFT)
+		{
 			Zrot += 2;
+			Yrot -= 2;
+		}
 
 		if (wParam == VK_RIGHT)
+		{
 			Zrot -= 2;
+			Yrot += 2;
+		}
+
 		
 		//if (wParam == WM_MOUSEWHEEL)
 		//	fProps += 0.1f;
