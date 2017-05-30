@@ -32,13 +32,15 @@
 #include <math.h>				// Define for sqrt
 #include <stdio.h>
 #include "resource.h"           // About box resource identifiers.
+#include <stdlib.h>
+#include <time.h>
 
 
 #include "Drone.h"
 #include "Mine.h"
 #include "Trolley.h"
 #include "Texture.h"
-#include "Scene.h"
+#include "SceneElement.h"
 
 
 
@@ -311,9 +313,12 @@ void UkladWsp(void)
 }
 
 
+
 Drone drone(0.5, 0.5, 0.5);
-Mine s1[6];
+SceneElement s1[6]{ 2,1,2,1,1,1 };
 Trolley p1;
+
+int sceneCount = 0;
 
 float Xtrans = 0, Ytrans = 50, Ztrans = 0;
 float Xrot = 0, Yrot = 0, Zrot = 0;
@@ -339,7 +344,7 @@ void RenderScene(void)
 
 	Xtrans += aProps * -sin(Zrot * 3.14/180);
 	Ytrans += aProps * cos(Zrot * 3.14 / 180) * cos(Xrot * 3.14 / 180);
-	Ztrans += aProps * sin(Xrot * 3.14 / 180);
+	Ztrans += aProps * -sin(Xrot * 3.14 / 180);
 
 	if (Ytrans > 7) Ytrans -= aGravity;
 	else
@@ -352,22 +357,21 @@ void RenderScene(void)
 	drone.SetRotation(Xrot, Yrot, Zrot);
 	drone.SetScale(0.2, 0.2, 0.2);
 
-	if (Ztrans < -50)
+	if (Ztrans > 50)
 	{
-		Ztrans += 50;
+		Ztrans -= 50;
+		sceneCount++;
 	}
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		s1[i].SetPosition(0, 50, -50 * i - Ztrans + 100);
+		int tmp = i + sceneCount;
+		tmp %= 6;
+		s1[tmp].SetPosition(0, 50, -50 * i + Ztrans + 100);
+		s1[tmp].Draw();
 	}
 
 	drone.Draw();
-
-	for (int i = 0; i < 6; i++)
-	{
-		if(s1[i].GetPosition().Z < 100)	s1[i].Draw();
-	}
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);

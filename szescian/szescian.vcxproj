@@ -166,6 +166,7 @@
     <ClCompile Include="Prop.cpp" />
     <ClCompile Include="RailTracks.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneElement.cpp" />
     <ClCompile Include="Shield.cpp" />
     <ClCompile Include="Skid.cpp" />
     <ClCompile Include="Sphere.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="RESOURCE.H" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneElement.h" />
     <ClInclude Include="Shield.h" />
     <ClInclude Include="Skid.h" />
     <ClInclude Include="Solid3D.h" />
