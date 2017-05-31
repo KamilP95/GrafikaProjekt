@@ -40,7 +40,7 @@
 #include "Mine.h"
 #include "Trolley.h"
 #include "Texture.h"
-#include "SceneElement.h"
+#include "Scene.h"
 
 
 
@@ -315,15 +315,20 @@ void UkladWsp(void)
 
 
 Drone drone(0.5, 0.5, 0.5);
-SceneElement s1[6]{ 2,1,2,1,1,1 };
+Scene s1[10]{ 1,4,4,4,1,1,5,5,5,2 };
 Trolley p1;
 
 int sceneCount = 0;
 
 float Xtrans = 0, Ytrans = 50, Ztrans = 0;
 float Xrot = 0, Yrot = 0, Zrot = 0;
+float XrotRad = 0, YrotRad = 0, ZrotRad = 0;
 float fProps = 0, aProps = 0;
 float fGravity = 0.07, aGravity = 0;
+
+float nextAngle = 0, tempAngle = 0;
+Vector3 position;
+float rotation = 0;
 
 // Called to draw scene
 void RenderScene(void)
@@ -335,16 +340,21 @@ void RenderScene(void)
 	// Save the matrix state and do the rotations
 	glPushMatrix();
 
-	gluLookAt(0, 50, 100, 0, 50, 0, 0, 1, 0);
+	gluLookAt(0, 50, 0, 0, 50, -100, 0, 1, 0);
 
 	//UkladWsp();
 	/////////////////////////////////////////////////////////////////
 	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
 	/////////////////////////////////////////////////////////////////
 
-	Xtrans += aProps * -sin(Zrot * 3.14 / 180) * sin(Xrot * 3.14 / 180);
-	Ytrans += aProps * cos(Zrot * 3.14 / 180) * cos(Xrot * 3.14 / 180);
-	Ztrans += aProps * -sin(Xrot * 3.14 / 180) * cos(Zrot * 3.14 / 180);
+	XrotRad = Xrot * 3.14 / 180;
+	YrotRad = Yrot * 3.14 / 180;
+	ZrotRad = Zrot * 3.14 / 180;
+
+	Xtrans += aProps * -sin(ZrotRad) * sin(XrotRad);
+	Ytrans += aProps * cos(YrotRad) * cos(XrotRad);
+	Ztrans += aProps * -sin(XrotRad) * cos(ZrotRad);
+	if (Ytrans < 0) Ytrans *= -1;
 
 	if (Ytrans > 7) Ytrans -= aGravity;
 	else
@@ -353,23 +363,37 @@ void RenderScene(void)
 		aGravity = 0;
 	}
 
-	drone.SetPosition(0, Ytrans, 0);
+	drone.SetPosition(0, Ytrans, -50);
 	drone.SetRotation(Xrot, Yrot, 0);
 	drone.SetScale(0.2, 0.2, 0.2);
 
-	if (Ztrans > 50)
+	tempAngle = (s1[(sceneCount + 1) % 10].GetRotation().Y) * 3.14 / 180;
+	if (Xtrans * sin(tempAngle) + Ztrans * cos(tempAngle) > 50)
 	{
-		Ztrans -= 50;
+		Ztrans -= 50 * cos(tempAngle);
+		Xtrans -= 50 * sin(tempAngle);
+		nextAngle = s1[sceneCount % 10].GetRotation().Y + s1[sceneCount % 10].GetAngle();
 		sceneCount++;
 	}
 
+
 	glPushMatrix();
 	glRotated(-Zrot, 0, 1, 0);
-	for (int i = 0; i < 5; i++)
+	
+	s1[sceneCount % 10].SetPosition(Xtrans, 50, Ztrans);
+	s1[sceneCount % 10].SetRotation(0, nextAngle, 0);
+	s1[sceneCount % 10].Draw();
+
+	for (int i = 1; i < 9; i++)
 	{
 		int tmp = i + sceneCount;
-		tmp %= 6;
-		s1[tmp].SetPosition(Xtrans, 50, -50 * i + Ztrans + 100);
+		tmp %= 10;
+		int tmp2 = tmp - 1;
+		if (tmp2 < 0) tmp2 += 10;
+		position = s1[tmp2].GetPosition();
+		rotation = s1[tmp2].GetRotation().Y + s1[tmp2].GetAngle();
+		s1[tmp].SetPosition(position.X - 50 * sin(rotation * 3.14 / 180), position.Y, position.Z - 50 * cos(rotation * 3.14 / 180));
+		s1[tmp].SetRotation(0, rotation, 0);
 		s1[tmp].Draw();
 	}
 	glPopMatrix();
