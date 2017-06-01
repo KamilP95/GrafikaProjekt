@@ -312,10 +312,9 @@ void UkladWsp(void)
 
 }
 
-
-
+Cylinder A;
 Drone drone(0.5, 0.5, 0.5);
-Scene s1[10]{ 1,4,4,4,1,1,5,5,5,2 };
+Scene s1[10]{ 1,2,3,4,1,2,5,2,4,4 };
 Trolley p1;
 
 int sceneCount = 0;
@@ -340,6 +339,10 @@ void RenderScene(void)
 	// Save the matrix state and do the rotations
 	glPushMatrix();
 
+	A.SetScale(2000, 2000, 400);
+	A.SetColor(0.3, 0.3, 0.3);
+	A.Draw();
+
 	gluLookAt(0, 50, 0, 0, 50, -100, 0, 1, 0);
 
 	//UkladWsp();
@@ -350,12 +353,14 @@ void RenderScene(void)
 	XrotRad = Xrot * 3.14 / 180;
 	YrotRad = Yrot * 3.14 / 180;
 	ZrotRad = Zrot * 3.14 / 180;
-
+	
+	//magiczne linie
 	Xtrans += aProps * -sin(ZrotRad) * sin(XrotRad);
 	Ytrans += aProps * cos(YrotRad) * cos(XrotRad);
 	Ztrans += aProps * -sin(XrotRad) * cos(ZrotRad);
 	if (Ytrans < 0) Ytrans *= -1;
 
+	//grawitacja
 	if (Ytrans > 7) Ytrans -= aGravity;
 	else
 	{
@@ -363,10 +368,13 @@ void RenderScene(void)
 		aGravity = 0;
 	}
 
+	//rysowanie drona
 	drone.SetPosition(0, Ytrans, -50);
 	drone.SetRotation(Xrot, Yrot, 0);
-	drone.SetScale(0.2, 0.2, 0.2);
+	drone.SetScale(0.15, 0.15, 0.15);
+	drone.Draw();
 
+	//licznik, kiedy zmieniæ segmenty na scenie
 	tempAngle = (s1[(sceneCount + 1) % 10].GetRotation().Y) * 3.14 / 180;
 	if (Xtrans * sin(tempAngle) + Ztrans * cos(tempAngle) > 50)
 	{
@@ -380,10 +388,12 @@ void RenderScene(void)
 	glPushMatrix();
 	glRotated(-Zrot, 0, 1, 0);
 	
+	//rysowanie pierwszego segmentu sceny
 	s1[sceneCount % 10].SetPosition(Xtrans, 50, Ztrans);
 	s1[sceneCount % 10].SetRotation(0, nextAngle, 0);
 	s1[sceneCount % 10].Draw();
 
+	//rysowanie kolejnych segmentów
 	for (int i = 1; i < 9; i++)
 	{
 		int tmp = i + sceneCount;
@@ -397,8 +407,6 @@ void RenderScene(void)
 		s1[tmp].Draw();
 	}
 	glPopMatrix();
-
-	drone.Draw();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);

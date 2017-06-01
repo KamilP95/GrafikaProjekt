@@ -2,6 +2,8 @@
 #include "Cube.h"
 #include "SceneElement.h"
 #include "Mine.h"
+#include "MineShaftLeft.h"
+#include "MineShaftRight.h"
 #include "Complex3D.h"
 
 class Scene :

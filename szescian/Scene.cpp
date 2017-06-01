@@ -17,12 +17,12 @@ Scene::Scene(int type, float x, float y, float z)
 		_elements[0] = new Mine;
 		break;
 	case 4:
-		_elements[0] = new Cube;
-		angle = -30;
+		_elements[0] = new MineShaftLeft;
+		angle = 40;
 		break;
 	case 5:
-		_elements[0] = new Cube;
-		angle = 30;
+		_elements[0] = new MineShaftRight;
+		angle = -40;
 		break;
 	default:
 		break;

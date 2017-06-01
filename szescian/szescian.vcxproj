@@ -158,6 +158,8 @@
     <ClCompile Include="Grip.cpp" />
     <ClCompile Include="Mine.cpp" />
     <ClCompile Include="MineShaft.cpp" />
+    <ClCompile Include="MineShaftLeft.cpp" />
+    <ClCompile Include="MineShaftRight.cpp" />
     <ClCompile Include="MineStamp.cpp" />
     <ClCompile Include="Motor.cpp" />
     <ClCompile Include="MotorArm.cpp" />
@@ -191,6 +193,8 @@
     <ClInclude Include="Grip.h" />
     <ClInclude Include="Mine.h" />
     <ClInclude Include="MineShaft.h" />
+    <ClInclude Include="MineShaftLeft.h" />
+    <ClInclude Include="MineShaftRight.h" />
     <ClInclude Include="MineStamp.h" />
     <ClInclude Include="Motor.h" />
     <ClInclude Include="MotorArm.h" />

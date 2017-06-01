@@ -26,7 +26,7 @@ MineStamp::MineStamp(float x, float y, float z)
 	_elements[4]->SetRotation(0, 0, -45);
 	_elements[4]->SetPosition(-30, 30, 0);
 
-	SetTexture("Bitmapy\\drewno.bmp");
+	//SetTexture("Bitmapy\\drewno.bmp");
 
 	for (int i = 0; i < _elementsCount; i++)
 	{
