@@ -43,6 +43,7 @@ Drone::Drone(float x, float y, float z)
 	_elements[0]->SetColor2(0.1,0.1,0.1);
 
 	SetTexture("Bitmapy\\drewno.bmp");
+	Random::InitializeSeed();
 }
 
 void Drone::RotateProps(float speed) const

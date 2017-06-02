@@ -1,17 +1,15 @@
 #pragma once
-#include "Cube.h"
 #include "SceneElement.h"
-#include "Mine.h"
-#include "MineShaftLeft.h"
-#include "MineShaftRight.h"
-#include "Complex3D.h"
+#include "Drone.h"
 
-class Scene :
-	public Complex3D
+class Scene
 {
 public:
-	float angle;
-	float GetAngle() { return angle; }
-	Scene(int type, float x = 1, float y = 1, float z = 1);
+	Vector3 trans;
+
+	Scene();
+	void Draw(SceneElement& scene, Vector3 trans, float nextAngle);
+	void Draw(SceneElement& prev, SceneElement& scene);
+	void Draw(Drone & drone, Vector3 trans, Vector3 rot);
 };
 

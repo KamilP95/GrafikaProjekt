@@ -37,9 +37,7 @@
 
 
 #include "Drone.h"
-#include "Mine.h"
-#include "Trolley.h"
-#include "Texture.h"
+#include "SceneElement.h"
 #include "Scene.h"
 
 
@@ -312,22 +310,18 @@ void UkladWsp(void)
 
 }
 
-Cylinder A;
-Drone drone(0.5, 0.5, 0.5);
-Scene s1[10]{ 1,2,3,4,1,2,5,2,4,4 };
-Trolley p1;
+Cylinder background;
+Drone drone(0.5, 0.5, 0.5);		//jest w nim init random
+SceneElement s1[10];
+Scene scene;
 
 int sceneCount = 0;
 
-float Xtrans = 0, Ytrans = 50, Ztrans = 0;
-float Xrot = 0, Yrot = 0, Zrot = 0;
-float XrotRad = 0, YrotRad = 0, ZrotRad = 0;
+Vector3 trans, rot, rotRad;
 float fProps = 0, aProps = 0;
 float fGravity = 0.07, aGravity = 0;
 
 float nextAngle = 0, tempAngle = 0;
-Vector3 position;
-float rotation = 0;
 
 // Called to draw scene
 void RenderScene(void)
@@ -339,73 +333,53 @@ void RenderScene(void)
 	// Save the matrix state and do the rotations
 	glPushMatrix();
 
-	A.SetScale(2000, 2000, 400);
-	A.SetColor(0.3, 0.3, 0.3);
-	A.Draw();
+	background.SetScale(2000, 2000, 400);
+	background.SetColor(0.3, 0.3, 0.3);
+	background.Draw();
 
 	gluLookAt(0, 50, 0, 0, 50, -100, 0, 1, 0);
 
-	//UkladWsp();
-	/////////////////////////////////////////////////////////////////
-	// MIEJSCE NA KOD OPENGL DO TWORZENIA WLASNYCH SCEN:		   //
-	/////////////////////////////////////////////////////////////////
-
-	XrotRad = Xrot * 3.14 / 180;
-	YrotRad = Yrot * 3.14 / 180;
-	ZrotRad = Zrot * 3.14 / 180;
-	
-	//magiczne linie
-	Xtrans += aProps * -sin(ZrotRad) * sin(XrotRad);
-	Ytrans += aProps * cos(YrotRad) * cos(XrotRad);
-	Ztrans += aProps * -sin(XrotRad) * cos(ZrotRad);
-	if (Ytrans < 0) Ytrans *= -1;
+	rotRad.X = rot.X * PI / 180;
+	rotRad.Y = rot.Y * PI / 180;
+	rotRad.Z = rot.Z * PI / 180;
+	trans.X += aProps * -sin(rotRad.Z) * sin(rotRad.X);
+	trans.Y += aProps * cos(rotRad.Y) * cos(rotRad.X);
+	trans.Z += aProps * -sin(rotRad.X) * cos(rotRad.Z);
+	if (trans.Y < 0) trans.Y *= -1;
 
 	//grawitacja
-	if (Ytrans > 7) Ytrans -= aGravity;
+	if (trans.Y > 7) trans.Y -= aGravity;
 	else
 	{
-		Ytrans = 7;
+		trans.Y = 7;
 		aGravity = 0;
 	}
 
-	//rysowanie drona
-	drone.SetPosition(0, Ytrans, -50);
-	drone.SetRotation(Xrot, Yrot, 0);
-	drone.SetScale(0.15, 0.15, 0.15);
-	drone.Draw();
-
 	//licznik, kiedy zmieniæ segmenty na scenie
-	tempAngle = (s1[(sceneCount + 1) % 10].GetRotation().Y) * 3.14 / 180;
-	if (Xtrans * sin(tempAngle) + Ztrans * cos(tempAngle) > 50)
+	tempAngle = (s1[(sceneCount + 1) % 10].GetRotation().Y) * PI / 180;
+	if (trans.X * sin(tempAngle) + trans.Z * cos(tempAngle) > 50)
 	{
-		Ztrans -= 50 * cos(tempAngle);
-		Xtrans -= 50 * sin(tempAngle);
+		trans.Z -= 50 * cos(tempAngle);
+		trans.X -= 50 * sin(tempAngle);
 		nextAngle = s1[sceneCount % 10].GetRotation().Y + s1[sceneCount % 10].GetAngle();
 		sceneCount++;
 	}
 
+	scene.Draw(drone, trans, rot);
 
 	glPushMatrix();
-	glRotated(-Zrot, 0, 1, 0);
-	
-	//rysowanie pierwszego segmentu sceny
-	s1[sceneCount % 10].SetPosition(Xtrans, 50, Ztrans);
-	s1[sceneCount % 10].SetRotation(0, nextAngle, 0);
-	s1[sceneCount % 10].Draw();
+	glRotated(-rot.Z, 0, 1, 0);
 
-	//rysowanie kolejnych segmentów
+	scene.Draw(s1[sceneCount % 10], trans, nextAngle);
 	for (int i = 1; i < 9; i++)
 	{
 		int tmp = i + sceneCount;
+		int tmp2 = i + sceneCount - 1;
 		tmp %= 10;
-		int tmp2 = tmp - 1;
-		if (tmp2 < 0) tmp2 += 10;
-		position = s1[tmp2].GetPosition();
-		rotation = s1[tmp2].GetRotation().Y + s1[tmp2].GetAngle();
-		s1[tmp].SetPosition(position.X - 50 * sin(rotation * 3.14 / 180), position.Y, position.Z - 50 * cos(rotation * 3.14 / 180));
-		s1[tmp].SetRotation(0, rotation, 0);
-		s1[tmp].Draw();
+		tmp2 %= 10;
+		scene.Draw(s1[tmp2], s1[tmp]);
 	}
+
 	glPopMatrix();
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
@@ -626,7 +600,7 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 			if (aProps > 0) aProps -= 0.1;
 			//zCamera -=0.2;
 			if(fProps > 0) drone.RotateProps(50);
-			Yrot /= 1.1;
+			rot.Y /= 1.1;
 
 			InvalidateRect(hWnd, NULL, true);
 		}
@@ -773,56 +747,33 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	case WM_KEYDOWN:
 	{
 		if (wParam == VK_UP)
-			Xrot -= 5;
+			rot.X -= 5;
 
 		if (wParam == VK_DOWN)
-			Xrot += 5;
+			rot.X += 5;
 
 		if (wParam == VK_LEFT)
 		{
-			Zrot += 2;
-			Yrot -= 2;
+			rot.Z += 2;
+			rot.Y -= 2;
 		}
 
 		if (wParam == VK_RIGHT)
 		{
-			Zrot -= 2;
-			Yrot += 2;
+			rot.Z -= 2;
+			rot.Y += 2;
 		}
 
 		
-		//if (wParam == WM_MOUSEWHEEL)
-		//	fProps += 0.1f;
-		
 		if (wParam == 'K')
-			fProps = 0.0f;
+		{
+			if(fProps > 0)	fProps -= 0.1f;
+		}
 
 		if (wParam == 'L')
-			fProps = 0.15f;
-
-		if (wParam == 'W')
-			yCamera += 0.5f;
-
-		if (wParam == 'S')
-			yCamera -= 0.5f;
-
-		if (wParam == 'A')
-			xCamera += 0.5f;
-
-		if (wParam == 'D')
-			xCamera -= 0.5f;
-
-		if (wParam == 'Q')
-			zCamera += 0.5f;
-
-		if (wParam == 'E')
-			zCamera -= 0.5f;
-
-		if (wParam == '+' && fovy < 180)
-			fovy++;
-
-		if (wParam == '-' && fovy > 0)
-			fovy--;
+		{
+			if (fProps < 0.2)	fProps += 0.1f;
+		}
 
 		InvalidateRect(hWnd, NULL, FALSE);
 	}

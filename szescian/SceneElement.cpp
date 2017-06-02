@@ -1,18 +1,31 @@
 #include "SceneElement.h"
 
 SceneElement::SceneElement(int type, float x, float y, float z)
-	: Complex3D(2, x, y, z)
+	: Complex3D(1, x, y, z)
 {
-	_elements[0] = new Mine();
-	_elements[1] = new Trolley();
-
-	
-	if (type == 1)
+	type = Random::NextF(1, 6);
+	angle = 0;
+	switch (type)
 	{
-		_elements[1]->SetPosition(-25, -30, 0);
-	}
-	else if (type == 2)
-	{
-		_elements[1]->SetPosition(25, -30, 0);
+	case 1:
+		_elements[0] = new MineTrolley(1);
+		break;
+	case 2:
+		_elements[0] = new MineTrolley(2);
+		break;
+	case 3:
+		_elements[0] = new Mine;
+		break;
+	case 4:
+		_elements[0] = new MineShaftLeft;
+		angle = 40;
+		break;
+	case 5:
+		_elements[0] = new MineShaftRight;
+		angle = -40;
+		break;
+	default:
+		break;
 	}
 }
+

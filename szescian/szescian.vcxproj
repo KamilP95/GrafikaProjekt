@@ -161,6 +161,7 @@
     <ClCompile Include="MineShaftLeft.cpp" />
     <ClCompile Include="MineShaftRight.cpp" />
     <ClCompile Include="MineStamp.cpp" />
+    <ClCompile Include="MineTrolley.cpp" />
     <ClCompile Include="Motor.cpp" />
     <ClCompile Include="MotorArm.cpp" />
     <ClCompile Include="MotorPart.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="MineShaftLeft.h" />
     <ClInclude Include="MineShaftRight.h" />
     <ClInclude Include="MineStamp.h" />
+    <ClInclude Include="MineTrolley.h" />
     <ClInclude Include="Motor.h" />
     <ClInclude Include="MotorArm.h" />
     <ClInclude Include="MotorPart.h" />
