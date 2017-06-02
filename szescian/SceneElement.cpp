@@ -1,8 +1,9 @@
 #include "SceneElement.h"
 
-SceneElement::SceneElement(int type, float x, float y, float z)
+SceneElement::SceneElement(float x, float y, float z)
 	: Complex3D(1, x, y, z)
 {
+	//type = Random::NextF(1, 4);
 	type = Random::NextF(1, 6);
 	angle = 0;
 	switch (type)

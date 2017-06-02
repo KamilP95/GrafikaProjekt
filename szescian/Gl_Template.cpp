@@ -373,32 +373,54 @@ void RenderScene(void)
 		trans.Y = 80;
 	}
 
-	//kolizja ze œcianami
-	if (fabsf(trans.X * cos(nextAngle * PI / 180)) < 50 && fabsf(trans.Z * sin(nextAngle * PI / 180)) < 50)
-	{
-		A.SetColor(0, 1, 0);
-	}
-	else
-	{
-		A.SetColor(1, 0, 0);
-		trans = lastTrans;
-	}
-	A.SetPosition(0, trans.Y + 20, 0);
-	A.Draw();
-
+	//kolizja ze œcian¹
 	scene.Draw(drone, trans, rot);
-
-	glPushMatrix();
-	glRotated(-rot.Z, 0, 1, 0);
-		
-	scene.Draw(s1[sceneCount % size], trans, nextAngle);
+	scene.SetPR(s1[sceneCount % size], trans, nextAngle);
 	for (int i = 1; i < 9; i++)
 	{
 		int tmp = i + sceneCount;
 		int tmp2 = i + sceneCount - 1;
 		tmp %= size;
 		tmp2 %= size;
-		scene.Draw(s1[tmp2], s1[tmp]);
+		scene.SetPR(s1[tmp2], s1[tmp]);
+	}
+
+	int collision = 0;
+	for (int i = 0; i < 2; i++)
+	{
+		int tmp = i + sceneCount;
+		tmp %= size;
+		collision += scene.CheckCollision(s1[tmp], drone.GetPosition());
+	}
+
+	if (collision > 0) {
+		A.SetColor(0, 1, 0);
+	}
+	else {
+		A.SetColor(1, 0, 0);
+		trans = lastTrans;
+	}
+
+
+	//rysowanie
+	A.SetPosition(0, trans.Y + 20, 0);
+	A.Draw();
+
+	//scene.Draw(drone, trans, rot);
+
+	glPushMatrix();
+	glRotated(-rot.Z, 0, 1, 0);
+		
+	scene.SetPR(s1[sceneCount % size], trans, nextAngle);
+	s1[sceneCount % size].Draw();
+	for (int i = 1; i < 9; i++)
+	{
+		int tmp = i + sceneCount;
+		int tmp2 = i + sceneCount - 1;
+		tmp %= size;
+		tmp2 %= size;
+		scene.SetPR(s1[tmp2], s1[tmp]);
+		s1[tmp].Draw();
 	}
 	glPopMatrix();
 	lastTrans = trans;

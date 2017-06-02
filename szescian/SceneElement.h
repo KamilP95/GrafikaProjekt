@@ -10,7 +10,9 @@ class SceneElement :
 {
 public:
 	float angle;
+	int type;
 
-	SceneElement(int type = 1, float x = 1, float y = 1, float z = 1);
+	SceneElement(float x = 1, float y = 1, float z = 1);
 	float GetAngle() { return angle; }
+	int GetType() { return type; }
 };

@@ -5,11 +5,13 @@
 class Scene
 {
 public:
-	Vector3 trans;
-
 	Scene();
-	void Draw(SceneElement& scene, Vector3 trans, float nextAngle);
-	void Draw(SceneElement& prev, SceneElement& scene);
+	void SetPR(SceneElement& scene, Vector3 trans, float nextAngle);
+	void SetPR(SceneElement& prev, SceneElement& scene);
 	void Draw(Drone & drone, Vector3 trans, Vector3 rot);
+	int CheckWallsCollision(SceneElement& scene, Vector3 dronePosition);
+	int CheckTrolleyCollision(Vector3 trolleyPosition, Vector3 dronePosition);
+	Vector3 GetTrolleyPosition(SceneElement & scene, int sceneType);
+	int CheckCollision(SceneElement & scene, Vector3 dronePosition);
 };
 
