@@ -310,18 +310,20 @@ void UkladWsp(void)
 
 }
 
+const int size = 100;
+Cube A;
 Cylinder background;
 Drone drone(0.5, 0.5, 0.5);		//jest w nim init random
-SceneElement s1[10];
+SceneElement s1[size];
 Scene scene;
 
 int sceneCount = 0;
+float nextAngle = 0, tempAngle = 0;
+Vector3 trans, rot, rotRad, lastTrans;
 
-Vector3 trans, rot, rotRad;
 float fProps = 0, aProps = 0;
 float fGravity = 0.07, aGravity = 0;
 
-float nextAngle = 0, tempAngle = 0;
 
 // Called to draw scene
 void RenderScene(void)
@@ -337,7 +339,7 @@ void RenderScene(void)
 	background.SetColor(0.3, 0.3, 0.3);
 	background.Draw();
 
-	gluLookAt(0, 50, 0, 0, 50, -100, 0, 1, 0);
+	gluLookAt(0, 50, 30, 0, 50, -100, 0, 1, 0);
 
 	rotRad.X = rot.X * PI / 180;
 	rotRad.Y = rot.Y * PI / 180;
@@ -345,7 +347,7 @@ void RenderScene(void)
 	trans.X += aProps * -sin(rotRad.Z) * sin(rotRad.X);
 	trans.Y += aProps * cos(rotRad.Y) * cos(rotRad.X);
 	trans.Z += aProps * -sin(rotRad.X) * cos(rotRad.Z);
-	if (trans.Y < 0) trans.Y *= -1;
+	trans.Y = fabsf(trans.Y);
 
 	//grawitacja
 	if (trans.Y > 7) trans.Y -= aGravity;
@@ -356,31 +358,50 @@ void RenderScene(void)
 	}
 
 	//licznik, kiedy zmieniæ segmenty na scenie
-	tempAngle = (s1[(sceneCount + 1) % 10].GetRotation().Y) * PI / 180;
+	tempAngle = (s1[(sceneCount + 1) % size].GetRotation().Y) * PI / 180;
 	if (trans.X * sin(tempAngle) + trans.Z * cos(tempAngle) > 50)
 	{
 		trans.Z -= 50 * cos(tempAngle);
 		trans.X -= 50 * sin(tempAngle);
-		nextAngle = s1[sceneCount % 10].GetRotation().Y + s1[sceneCount % 10].GetAngle();
+		nextAngle = s1[sceneCount % size].GetRotation().Y + s1[sceneCount % size].GetAngle();
 		sceneCount++;
 	}
+
+	//kolizja z sufitem
+	if (trans.Y > 80)
+	{
+		trans.Y = 80;
+	}
+
+	//kolizja ze œcianami
+	if (fabsf(trans.X * cos(nextAngle * PI / 180)) < 50 && fabsf(trans.Z * sin(nextAngle * PI / 180)) < 50)
+	{
+		A.SetColor(0, 1, 0);
+	}
+	else
+	{
+		A.SetColor(1, 0, 0);
+		trans = lastTrans;
+	}
+	A.SetPosition(0, trans.Y + 20, 0);
+	A.Draw();
 
 	scene.Draw(drone, trans, rot);
 
 	glPushMatrix();
 	glRotated(-rot.Z, 0, 1, 0);
-
-	scene.Draw(s1[sceneCount % 10], trans, nextAngle);
+		
+	scene.Draw(s1[sceneCount % size], trans, nextAngle);
 	for (int i = 1; i < 9; i++)
 	{
 		int tmp = i + sceneCount;
 		int tmp2 = i + sceneCount - 1;
-		tmp %= 10;
-		tmp2 %= 10;
+		tmp %= size;
+		tmp2 %= size;
 		scene.Draw(s1[tmp2], s1[tmp]);
 	}
-
 	glPopMatrix();
+	lastTrans = trans;
 
 	//Sposób na odróŸnienie "przedniej" i "tylniej" œciany wielok¹ta:
 	glPolygonMode(GL_BACK, GL_LINE);

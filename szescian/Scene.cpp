@@ -23,7 +23,7 @@ void Scene::Draw(SceneElement & prev, SceneElement & scene)
 
 void Scene::Draw(Drone & drone, Vector3 trans, Vector3 rot)
 {
-	drone.SetPosition(0, trans.Y, -50);
+	drone.SetPosition(0, trans.Y, /*-50*/ 0);
 	drone.SetRotation(rot.X, rot.Y, 0);
 	drone.SetScale(0.15, 0.15, 0.15);
 	drone.Draw();

@@ -5,7 +5,7 @@ MineShaftRight::MineShaftRight(float x, float y, float z)
 	: Complex3D(4, x, y, z)
 {
 	for (int i = 0; i < 3; i++)
-		_elements[i] = new StoneWall(15, -2.5, 2.5, 1.5, 1.5, 1.5);
+		_elements[i] = new StoneWall(15, -2.5, 2.5, 1.3, 1.5, 1.5);
 	_elements[3] = new MineStamp();
 
 	_elements[0]->SetRotation(0, 70, 0);
