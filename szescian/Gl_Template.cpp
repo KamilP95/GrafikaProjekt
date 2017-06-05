@@ -311,11 +311,13 @@ void UkladWsp(void)
 }
 
 const int size = 100;
-Cube A;
+//Cube A;
 Cylinder background;
 Drone drone(0.5, 0.5, 0.5);		//jest w nim init random
 SceneElement s1[size];
 Scene scene;
+Cube healthBar(1, 1, 1);
+
 
 int sceneCount = 0;
 float nextAngle = 0, tempAngle = 0;
@@ -323,6 +325,7 @@ Vector3 trans, rot, rotRad, lastTrans;
 
 float fProps = 0, aProps = 0;
 float fGravity = 0.07, aGravity = 0;
+float droneHealth = 100;
 
 
 // Called to draw scene
@@ -338,6 +341,12 @@ void RenderScene(void)
 	background.SetScale(2000, 2000, 400);
 	background.SetColor(0.3, 0.3, 0.3);
 	background.Draw();
+	healthBar.SetPosition(-4 - (10 - healthBar.Width()) / 2, 8, -5);
+	healthBar.SetScale(droneHealth/10, .5, .01);
+	healthBar.SetColor(1, 0, 0);
+	
+	if(droneHealth > 0)
+		healthBar.Draw();
 
 	gluLookAt(0, 50, 30, 0, 50, -100, 0, 1, 0);
 
@@ -394,17 +403,18 @@ void RenderScene(void)
 	}
 
 	if (collision > 0) {
-		A.SetColor(0, 1, 0);
+		//A.SetColor(0, 1, 0);
 	}
 	else {
-		A.SetColor(1, 0, 0);
+		//A.SetColor(1, 0, 0);
 		trans = lastTrans;
+		if(droneHealth > 0) droneHealth -= .5;
 	}
 
 
 	//rysowanie
-	A.SetPosition(0, trans.Y + 20, 0);
-	A.Draw();
+	//A.SetPosition(0, trans.Y + 20, 0);
+	//A.Draw();
 
 	//scene.Draw(drone, trans, rot);
 
@@ -635,14 +645,18 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	case WM_TIMER:
 		if(wParam == 100)
 		{
+			if (droneHealth <= 0) 
+				fProps = 0;
+			else
+				drone.RotateProps(50);
 			if (aGravity < 1)
 			{
 				aGravity += fGravity;
 			}
 			if (aProps < 2) aProps += fProps;
-			if (aProps > 0) aProps -= 0.1;
+			if (aProps > 0) aProps -= 0.01;
 			//zCamera -=0.2;
-			if(fProps > 0) drone.RotateProps(50);
+			
 			rot.Y /= 1.1;
 
 			InvalidateRect(hWnd, NULL, true);
@@ -810,12 +824,12 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		
 		if (wParam == 'K')
 		{
-			if(fProps > 0)	fProps -= 0.1f;
+			if(fProps > 0)	fProps -= 0.05f;
 		}
 
 		if (wParam == 'L')
 		{
-			if (fProps < 0.2)	fProps += 0.1f;
+			if (fProps < 0.2)	fProps += 0.05f;
 		}
 
 		InvalidateRect(hWnd, NULL, FALSE);

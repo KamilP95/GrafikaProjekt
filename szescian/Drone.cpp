@@ -24,6 +24,7 @@ Drone::Drone(float x, float y, float z)
 
 	_elements[1]->SetRotation(0, 0, 20);
 	_elements[2]->SetRotation(0, 0, -20);
+	_elements[3]->SetRotation(0, 180, 0);
 
 	_elements[3]->SetPosition(0, -23, 0);
 
