@@ -35,7 +35,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-
+#include "AntTweakBar.h"
 #include "Drone.h"
 #include "SceneElement.h"
 #include "Scene.h"
@@ -217,6 +217,7 @@ void SetupRC()
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	// Black brush
 	glColor3f(0.0, 0.0, 0.0);
+	TwInit(TW_OPENGL, NULL);
 }
 
 
@@ -336,6 +337,7 @@ void RenderScene(void)
 	// Clear the window with current clearing color
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// Save the matrix state and do the rotations
+
 	glPushMatrix();
 
 	background.SetScale(2000, 2000, 400);
@@ -382,8 +384,10 @@ void RenderScene(void)
 		trans.Y = 80;
 	}
 
-	//kolizja ze œcian¹
+	//rysowanie drona
 	scene.Draw(drone, trans, rot);
+
+	//kolizja ze œcian¹	
 	scene.SetPR(s1[sceneCount % size], trans, nextAngle);
 	for (int i = 1; i < 9; i++)
 	{
@@ -448,8 +452,23 @@ void RenderScene(void)
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 
+	TwInit(TW_OPENGL_CORE, NULL);
+	TwWindowSize(800, 800);
+	TwBar * myBar;
+	TwWindowSize(250, 80);
+	myBar = TwNewBar("Options");
+	TwDefine("Options color='48 48 48' alpha = 192 text = light");
+	TwDefine("GLOBAL fontsize = 3");
+	TwDefine(" GLOBAL color='192 0 192' text=dark ");
+	TwAddVarRW(myBar, "Score", TW_TYPE_INT32, &sceneCount, " min=0 max=1000 step=1 ");
+	TwAddVarRW(myBar, "Health", TW_TYPE_FLOAT, &droneHealth, " min=0 max=100 step=1 ");
+	TwDraw();
+
+
 	// Flush drawing commands
 	glFlush();
+
+
 }
 
 
@@ -837,25 +856,21 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	break;
 
 	// A menu command
-	//case WM_COMMAND:
-	//{
-	//	switch (LOWORD(wParam))
-	//	{
-	//		// Exit the program
-	//	case ID_FILE_EXIT:
-	//		DestroyWindow(hWnd);
-	//		break;
+	case WM_COMMAND:
+	{
+		switch (LOWORD(wParam))
+		{
+			// Exit the program
+		case ID_FILE_EXIT:
+			TwTerminate();
+			DestroyWindow(hWnd);
+			break;
 
-	//		// Display the about box
-	//	case ID_HELP_ABOUT:
-	//		DialogBox(hInstance,
-	//			MAKEINTRESOURCE(IDD_DIALOG_ABOUT),
-	//			hWnd,
-	//			AboutDlgProc);
-	//		break;
-	//	}
-	//}
-	//break;
+			// Display the about box
+
+		}
+	}
+	break;
 
 
 	default:   // Passes it on if unproccessed
